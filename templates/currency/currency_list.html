@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Currency{% endblock title %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script src="{% static 'js/currency.js' %}"></script>
+{% endblock javascript %}
+
+{% block content %}
+<div class="row justify-content-center mt-3 no-gutters">
+  <div class="col-md-6">
+    <div id="currency">
+      <div class="currency-barchart-container">
+        <currency-barchart :labels="labels" :series="series" :fetch-time="fetchTime">
+        </currency-barchart>
+      </div>
+      <div v-show="fetchTime"><small>Last fetched: [[ fetchTime ]] ago</small></div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div>
+      <ul class="list-unstyled left-menu">
+        <li>${{ BASE_AMOUNT|intcomma }} 기준</li>
+      </ul>
+    </div>
+    <div>
+      {% if  currencies %}
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>회사</th>
+            <th>Rate (수수료 포함)</th>
+            <th>Rate (수수료 비포함)</th>
+            <th>수수료</th>
+          </tr>
+        <tbody>
+          {% for currency in currencies %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><a href="{{ currency.url }}" target="_blank" rel="noopener noreferrer">{{ currency.name }}</a>
+            </td>
+            <td>{{ currency.real_rate }}</td>
+            <td class="text-muted">{{ currency.rate }}</td>
+            <td class="text-secondary">{{ currency.fee|default_if_none:"?" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        </thead>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock content %}
