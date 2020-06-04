@@ -20,3 +20,5 @@ package.json
 package-lock.json
 staticfiles/
 chromedriver
+celerybeat-schedule.db
+celerybeat.pid
