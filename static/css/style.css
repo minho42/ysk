@@ -69,189 +69,12 @@ body {
   /* background-color: #0366d6; */
 }
 
-.site-footer {
-  position: relative;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-top: 40px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #767676;
-  border-top: 1px solid #eee;
-  text-align: center;
-}
-.site-footer a {
-  color: #767676;
-  text-decoration: underline;
-}
-
-.site-footer-links li {
-  display: inline-block;
-  line-height: 16px;
-  margin-left: 1em;
-}
-
 a svg:hover #notification {
   fill: #000;
 }
 
 tr.clickable {
   cursor: pointer;
-}
-
-/* 
-.shift-label {
-  display: inline;
-  padding: .2em .6em .3em;
-  font-size: 75%;
-font-weight: bold;
-line-height: 1;
-color: #fff;
-background-color: #007bff;
-text-align: center;
-white-space: nowrap;
-vertical-align: baseline;
-border-radius: .35em;
-}
-*/
-
-/* fullcalendar */
-.fc-day-grid {
-  overflow: hidden !important;
-  height: auto !important;
-}
-/* .fc-day-grid-container {
-  cursor: pointer;
-} */
-.fc-unthemed td.fc-today {
-  /* background-color: transparent; */
-  background: transparent;
-}
-
-.fc-day-number {
-  /* font-size: 85%; */
-}
-
-.fc-day-header {
-  font-weight: normal;
-  /* font-size: 85%; */
-}
-
-.fc-left > h2 {
-  font-size: 22px;
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.fc-today .fc-day-number {
-  /* margin-top: 4px;  */
-  /* margin-left: 4px; */
-  font-weight: bold;
-  color: #fff;
-  width: 22px;
-  height: 22px;
-  line-height: 22px;
-  text-align: center;
-  /* apple */
-  background: #fc3d39;
-  /* google */
-  /* background: #4285f4; */
-  border-radius: 50%;
-}
-
-.fc-event {
-  /* width: 50%; */
-  /* border-radius: 2px; */
-  text-align: center;
-  /* line-height: 32px; */
-}
-
-.fc-event,
-.fc-event-dot {
-  background-color: #e8dbce;
-  border-color: transparent;
-}
-
-.fc-title {
-  /* font-size: 180%; */
-  /* font-weight: 500; */
-  font-size: 16px;
-}
-
-.fc-button {
-}
-
-/* https://www.reddit.com/ */
-.search-query {
-  background-color: rgb(246, 247, 248);
-  box-shadow: none;
-  color: rgb(28, 28, 28);
-  display: block;
-  height: 36px;
-  width: 100%;
-  border-radius: 4px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(237, 239, 241);
-
-  outline: none;
-  padding: 0px 16px 0px 40px;
-
-  background-image: url("../images/search2.png");
-  background-repeat: no-repeat;
-  background-position: 8px 2px;
-  background-size: 1.9rem;
-}
-
-.search-query:hover,
-.search-query:focus {
-  /* border-width: 1px; */
-  /* border-style: solid; */
-  border-color: #1a73e8;
-  box-shadow: none;
-}
-
-/* .progress-bar {
-  background-color: #a186be;
-} */
-
-/*https://opencollective.com/vuejs*/
-.-digit-bg {
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #8578d3;
-  padding: 4px 10px;
-  /*padding-left: 10px;*/
-}
-
-.-digit {
-  display: inline-block;
-  width: 20px;
-  height: 28px;
-  border-radius: 3px;
-  background-color: rgba(0, 0, 0, 0.6);
-  border: 1px solid #000;
-  color: #fff;
-  line-height: 1.25;
-  font-size: 22px;
-  font-weight: 700;
-  margin: 1px;
-  text-align: center;
-}
-
-.-character {
-  /* font-size: 22px; */
-  /* font-weight: 700; */
-  margin: 1px;
-  color: #fff;
-}
-
-/* th {
-  background-color: #42b983;
-  color: #fff;
-} */
-
-[v-cloak] {
-  display: none;
 }
 
 .red {
@@ -312,18 +135,6 @@ a.toggle2:hover {
   font-size: 0.7em;
 }
 
-.wiki-summary {
-  font-size: 80%;
-}
-
-/* django messages */
-.messages {
-  /* position: absolute; */
-  /* bottom: 20px; */
-  /* left: 20px; */
-  z-index: 99;
-}
-
 /* bootstrap alert: 
   primary secondary success danger warning info light dark */
 .alert {
@@ -362,24 +173,6 @@ a.toggle2:hover {
   letter-spacing: 0.02em;
 }
 
-/* .btn:hover {
-  color: #fff;
-} */
-
-/* reddit */
-/* 
-.btn-primary {
-  color: rgb(255, 255, 255);
-  background-color: rgb(0, 121, 211);
-  border-color: rgb(0, 121, 211);
-} 
-.btn-primary:hover {
-  color: #fff;
-  background-color: #36a0f2;
-  border-color: #36a0f2;
-}
-*/
-
 .btn-primary {
   background-color: #008bf7;
   border-color: #008bf7;
@@ -390,80 +183,12 @@ a.toggle2:hover {
   border-color: #36a0f2;
 }
 
-/* dribbble pink */
-.btn-pink {
-  color: #fff;
-  background-color: #ea4c89;
-}
-.btn-pink:hover {
-  color: #fff;
-  background-color: #df3e7b;
-}
-
-/* back to top button */
-.btn-backtotop {
-  font-size: 14px;
-  position: fixed;
-  right: 100px;
-  bottom: 18px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  border-radius: 4px;
-  padding: 3px 16px;
-  z-index: 99;
-}
-
-.btn-xsm {
-  padding: 0 4px;
-  /* padding: ; */
-  /* font-size: .5rem; */
-  font-size: 14px;
-  line-height: 14px;
-  border-radius: 0.2rem;
-}
-
-/* .nav-item .fas {
-  font-size: 1.2rem;
-} */
-
 .currency-barchart-container {
   /* width: 400px; */
   width: 100%;
   height: 220px;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-/* .table-xsm td {
-  padding: 2px !important;
-  line-height: 1.0;
-} */
-
-.growth-linechart-container {
-  /* width: 540px; */
-  height: 220px;
-  /* padding-top: 20px; */
-  padding-bottom: 20px;
-}
-
-/* code2 {
-  font-size: 87.5%;
-  color: #61afef;
-  word-break: break-word;
-  font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-} */
-
-.petrol-sydney {
-  border-color: rgba(0, 0, 0, 0.7);
-  border-width: 3px;
-  box-shadow: 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.left-menu {
-  /* line-height: 1.5rem; */
-  /* line-height: 240%; */
-  /* position: fixed;
-  height: 100%; */
 }
 
 .tr-bg {
@@ -484,56 +209,6 @@ a.toggle2:hover {
   line-height: 1.5;
   border-radius: 12.5rem;
   padding: 0.0625rem 0.4375rem;
-}
-
-/* github Counter class */
-.badge-counter {
-  /* background-color: rgba(27, 31, 35, 0.08); */
-  background-color: #1a73e8;
-  border-radius: 20px;
-  /* color: #586069; */
-  color: #fff;
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  padding: 2px 5px;
-}
-
-/* github btn */
-.gh-btn {
-  appearance: none;
-  background-position: -1px -1px;
-  background-repeat: repeat-x;
-  background-size: 110% 110%;
-  border: 1px solid rgba(27, 31, 35, 0.2);
-  border-radius: 0.25em;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 3px 10px;
-  position: relative;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-
-  background-color: #eff3f6;
-  background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
-  color: #24292e;
-}
-
-.gh-btn.hover,
-.gh-btn:hover {
-  background-color: #e6ebf1;
-  background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
-  background-position: -0.5em;
-  border-color: rgba(27, 31, 35, 0.35);
-
-  background-repeat: repeat-x;
-  text-decoration: none;
-  color: #24292e;
 }
 
 .text-small {
@@ -575,15 +250,6 @@ a.toggle2:hover {
   height: 1.2em;
 }
 
-/* .nav-item,
-.navbar-text {
-  margin-left: 6px;
-} */
-
-/* .nav-item .nav-link {
-  color: #24292e;
-} */
-
 /* github */
 .nav-link {
   font-weight: 600 !important;
@@ -592,162 +258,6 @@ a.toggle2:hover {
 
 .dropdown-divider {
   border-top: 1px solid #586069;
-}
-
-/* github user profile card */
-.d-table {
-  display: table !important;
-  background-color: #fff;
-}
-.d-table-cell {
-  display: table-cell !important;
-}
-.table-fixed {
-  table-layout: fixed !important;
-}
-
-.border-gray-light {
-  border-color: #eaecef !important;
-}
-.border-bottom {
-  border-bottom: 1px solid #e1e4e8 !important;
-}
-.width-full {
-  width: 100% !important;
-}
-
-.col-1 {
-  width: 8.33333%;
-}
-.col-2 {
-  width: 16.66667%;
-}
-.col-3 {
-  width: 25%;
-}
-.col-4 {
-  width: 33.33333%;
-}
-.col-5 {
-  width: 41.66667%;
-}
-.col-6 {
-  width: 50%;
-}
-.col-7 {
-  width: 58.33333%;
-}
-.col-8 {
-  width: 66.66667%;
-}
-.col-9 {
-  width: 75%;
-}
-.col-10 {
-  width: 83.33333%;
-}
-.col-11 {
-  width: 91.66667%;
-}
-.col-12 {
-  width: 100%;
-}
-
-/* .float-left{float:left!important}
-.float-right{float:right!important}
-.float-none{float:none!important} */
-
-.v-align-top {
-  vertical-align: top !important;
-}
-.link-gray-dark {
-  color: #24292e !important;
-}
-.link-gray-dark:hover {
-  color: #24292e !important;
-  text-decoration: underline;
-}
-.link-gray {
-  color: #586069 !important;
-}
-.link-gray:hover {
-  color: #586069 !important;
-  text-decoration: underline;
-}
-.d-inline-block {
-  display: inline-block !important;
-}
-.no-underline {
-  text-decoration: none !important;
-}
-.text-right {
-  text-align: right !important;
-}
-.position-relative {
-  position: relative !important;
-}
-
-/* https://store.steampowered.com/about/ */
-.about_install_steam_link {
-  cursor: pointer;
-  display: block;
-  text-transform: uppercase;
-  /* width: calc(100% - 75px); */
-  width: 100%;
-  /* padding: 15px 50px 15px 25px; */
-  padding: 15px 15px 15px 15px;
-  border-radius: 3px;
-  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
-  font-size: 18px;
-  line-height: 1;
-  letter-spacing: 0.03em;
-  text-align: left;
-  color: #fff;
-  position: relative;
-  /* font-family: "Motiva Sans", Sans-serif; */
-  font-weight: normal;
-  background: linear-gradient(to right, #06bfff 50%, #2b74ff 100%);
-  /* background: linear-gradient(to right, hotpink 50%, mediumpurple 100%); */
-  background-size: 200%;
-  background-position: right 0;
-  transition: background-position 300ms ease-in;
-}
-.about_install_steam_link:hover {
-  background-position: 0 0;
-}
-.about_install_steam_link::after {
-  /* background-image: url(https://steamcdn-a.akamaihd.net/store/about/icon-macos.svg); */
-  content: "";
-  background-position: top right;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  width: 18px;
-  height: 18px;
-  position: absolute;
-  right: 25px;
-}
-
-.signup-highlight {
-  /* background-color: #ea4c89 !important; */
-  /* color: #fff !important; */
-  border: 2px solid #ea4c89 !important;
-
-  border-radius: 4px !important;
-  display: inline-block;
-  padding: 5px 9px !important;
-}
-.signup-highlight:hover {
-  /* background-color: #df3e7b !important; */
-  /* color: #fff !important; */
-}
-
-.initial-round {
-  font-size: 15px;
-  font-weight: 500;
-  display: inline-block;
-  background-color: #ddd;
-  border-radius: 20px;
-  padding: 2px 8px;
 }
 
 .subnav-item:first-child {
@@ -818,7 +328,3 @@ hr.divider-or:after {
   font-weight: 700;
   text-transform: uppercase;
 }
-
-/* .alert ul {
-  list-style: none;
-} */
