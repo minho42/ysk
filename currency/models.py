@@ -1,5 +1,5 @@
 from django.db import models
-from currencycompare.models import TimeStampedModel
+from ysk.models import TimeStampedModel
 
 
 class Currency(TimeStampedModel):

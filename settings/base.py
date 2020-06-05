@@ -61,7 +61,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "currencycompare.urls"
+ROOT_URLCONF = "ysk.urls"
 
 TEMPLATES = [
     {
@@ -108,7 +108,7 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/2.1/ref/contrib/sites/#enabling-the-sites-framework
 SITE_ID = 1
 
-WSGI_APPLICATION = "currencycompare.wsgi.application"
+WSGI_APPLICATION = "ysk.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
