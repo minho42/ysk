@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %}Currency{% endblock title %}
+{% block title %}호주 역송금 비교{% endblock title %}
 
 {% block javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
@@ -11,51 +11,68 @@
 {% endblock javascript %}
 
 {% block content %}
-<div class="row justify-content-center mt-3 no-gutters">
-  <div class="col-md-6">
-    <div id="currency">
-      <div class="currency-barchart-container">
-        <currency-barchart :labels="labels" :series="series" :fetch-time="fetchTime">
-        </currency-barchart>
-      </div>
-      <div v-show="fetchTime"><small>Last fetched: [[ fetchTime ]] ago</small></div>
+<div class="row justify-content-center mt-1 no-gutters" id="currency">
+  <div class="col-md-6 mb-4">
+    <div class="currency-barchart-container">
+      <currency-barchart :labels="labels" :series="series" :fetch-time="fetchTime">
+      </currency-barchart>
     </div>
   </div>
 
   <div class="col-md-6">
-    <div>
-      <ul class="list-unstyled left-menu">
-        <li>${{ BASE_AMOUNT|intcomma }} 기준</li>
-      </ul>
-    </div>
-    <div>
-      {% if  currencies %}
-      <table class="table table-sm table-hover">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>회사</th>
-            <th>환율 (수수료 포함)</th>
-            <th>환율 (수수료 비포함)</th>
-            <th>수수료</th>
-          </tr>
-        <tbody>
-          {% for currency in currencies %}
-          <tr>
-            <td>{{ forloop.counter }}</td>
-            <td><a href="{{ currency.url }}" target="_blank" rel="noopener noreferrer">{{ currency.name }}</a>
-            </td>
-            <td>{{ currency.real_rate }}</td>
-            <td class="text-muted">{{ currency.rate }}</td>
-            <td class="text-secondary">{{ currency.fee|default_if_none:"?" }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-        </thead>
-      </table>
-      {% endif %}
-    </div>
+    {% if currencies %}
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Company</th>
+          <th>Rate</th>
+          <th>Rate without fee</th>
+          <th>Fee</th>
+        </tr>
+      <tbody>
+        {% for currency in currencies %}
+        <tr>
+          <td>
+            {% if currency.name == "Naver" %}
+            N/A
+            {% else %}
+            {{ forloop.counter0 }}
+            {% endif %}
+          </td>
+          <td>
+            <a href="{{ currency.url }}" target="_blank" rel="noopener noreferrer">{{ currency.name }}</a>
+          </td>
+          <td>
+            <span class="tag tag-green">
+              {{ currency.real_rate }}
+            </span>
+          </td>
+          <td class="text-muted">
+            <span class="tag tag-gray">
+              {{ currency.rate }}
+            </span>
+          </td>
+          <td class="text-secondary">
+            {% if currency.fee == 0 %}
+            <span class="tag tag-gray">
+              {{ currency.fee|floatformat|default_if_none:"?" }}
+            </span>
+            {% else %}
+            <span class="tag tag-red">
+              +{{ currency.fee|default_if_none:"?" }}
+            </span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      </thead>
+    </table>
+    {% endif %}
   </div>
 
+  <div v-show="fetchTime" class="mb-4"><small>Synced [[ fetchTime ]] ago</small></div>
 </div>
+
 {% endblock content %}

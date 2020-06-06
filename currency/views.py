@@ -396,7 +396,7 @@ def get_old_api_data():
 @timeit
 def get_new_api_data():
     # deleting all makes modified useless as created_at shares same value...
-    Currency.objects.all().delete()
+    # Currency.objects.all().delete()
 
     currencies = [
         # Using requests

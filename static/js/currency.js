@@ -52,7 +52,7 @@ Vue.component("currency-barchart", {
     var options = {
       //responsive, maintainAspectRatio for setting width/height in css
       responsive: true,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       legend: {
         display: false,
       },
@@ -90,7 +90,7 @@ Vue.component("currency-barchart", {
         xAxes: [
           {
             ticks: {
-              fontSize: 16,
+              fontSize: 14,
             },
             gridLines: {
               // display: false
@@ -113,7 +113,7 @@ Vue.component("currency-barchart", {
           color: "$000",
           font: {
             // style: ' bold',
-            size: 16,
+            size: 14,
           },
           offset: 0,
         },
