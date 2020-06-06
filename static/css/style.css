@@ -946,8 +946,8 @@ input[type]:focus {
   flex-shrink: 1;
   border-radius: 3px;
   padding: 3px 6px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   color: var(--text-black);
 }
 

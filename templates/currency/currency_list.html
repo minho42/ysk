@@ -26,8 +26,8 @@
         <tr>
           <th>Rank</th>
           <th>Company</th>
+          <th>Rate (inc. fee)</th>
           <th>Rate</th>
-          <th>Rate without fee</th>
           <th>Fee</th>
         </tr>
       <tbody>
@@ -49,15 +49,15 @@
             </span>
           </td>
           <td class="text-muted">
-            <span class="tag tag-gray">
-              {{ currency.rate }}
-            </span>
+            <!-- <span class="tag tag-gray"> -->
+            {{ currency.rate }}
+            <!-- </span> -->
           </td>
           <td class="text-secondary">
             {% if currency.fee == 0 %}
-            <span class="tag tag-gray">
-              {{ currency.fee|floatformat|default_if_none:"?" }}
-            </span>
+            <!-- <span class="tag tag-gray"> -->
+            {{ currency.fee|floatformat|default_if_none:"?" }}
+            <!-- </span> -->
             {% else %}
             <span class="tag tag-red">
               +{{ currency.fee|default_if_none:"?" }}
