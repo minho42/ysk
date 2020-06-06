@@ -35,6 +35,9 @@ class CurrencyView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["BASE_AMOUNT"] = BASE_AMOUNT
+        context["last_fetch_time"] = (
+            Currency.objects.order_by("-modified").first().modified
+        )
         return context
 
 

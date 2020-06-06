@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +51,6 @@
   <!-- /container -->
 
   <!-- this button must come before 'scriptjs' -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
   {% block javascript %}{% endblock javascript %}
@@ -58,15 +58,11 @@
 
   <footer class="site-footer">
     <ul class="site-footer-links">
-      <li>ysk</li>
+      <li>audkrw.com</li>
+      <li> | 수수료 ${{ BASE_AMOUNT|intcomma }} 기준 | </li>
       <li>
         <a href="https://twitter.com/minhokim42" target="_blank" rel="noopener noreferrer">
           <i class=" fab fa-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/minho42" target="_blank" rel="noopener noreferrer">
-          <i class=" fab fa-github"></i>
         </a>
       </li>
     </ul>

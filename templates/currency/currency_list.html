@@ -11,31 +11,24 @@
 {% endblock javascript %}
 
 {% block content %}
-<div class="row justify-content-center mt-1 no-gutters" id="currency">
-  <div class="col-md-6 mb-4">
-    <div class="currency-barchart-container">
-      <currency-barchart :labels="labels" :series="series" :fetch-time="fetchTime">
-      </currency-barchart>
-    </div>
-  </div>
-
+<div class="row justify-content-center mt-2 no-gutters">
   <div class="col-md-6">
     {% if currencies %}
     <table class="table table-sm table-hover">
       <thead>
         <tr>
-          <th>Rank</th>
-          <th>Company</th>
-          <th>Rate (inc. fee)</th>
-          <th>Rate</th>
-          <th>Fee</th>
+          <th>순위</th>
+          <th>업체</th>
+          <th>환율 (수수료포함)</th>
+          <th>환율</th>
+          <th>수수료</th>
         </tr>
       <tbody>
         {% for currency in currencies %}
         <tr>
           <td>
             {% if currency.name == "Naver" %}
-            N/A
+            -
             {% else %}
             {{ forloop.counter0 }}
             {% endif %}
@@ -64,7 +57,7 @@
             <!-- </span> -->
             {% else %}
             <span class="tag tag-red">
-              +{{ currency.fee|default_if_none:"?" }}
+              {{ currency.fee|default_if_none:"?" }}
             </span>
             {% endif %}
           </td>
@@ -74,9 +67,10 @@
       </thead>
     </table>
     {% endif %}
+
+    <div class="text-center mb-4 text-muted">업데이트 {{ last_fetch_time|naturaltime }}</div>
   </div>
 
-  <div v-show="fetchTime" class="mb-4"><small>Synced [[ fetchTime ]] ago</small></div>
 </div>
 
 {% endblock content %}
