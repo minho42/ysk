@@ -90,7 +90,7 @@ Vue.component("currency-barchart", {
         xAxes: [
           {
             ticks: {
-              fontSize: 14,
+              fontSize: 16,
             },
             gridLines: {
               // display: false
@@ -113,7 +113,7 @@ Vue.component("currency-barchart", {
           color: "$000",
           font: {
             // style: ' bold',
-            size: 14,
+            size: 16,
           },
           offset: 0,
         },

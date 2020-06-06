@@ -50,7 +50,11 @@
           </td>
           <td class="text-muted">
             <!-- <span class="tag tag-gray"> -->
+            {% if currency.real_rate == currency.rate %}
+            -
+            {% else %}
             {{ currency.rate }}
+            {% endif %}
             <!-- </span> -->
           </td>
           <td class="text-secondary">
