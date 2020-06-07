@@ -14,6 +14,9 @@
   --tag-yellow: rgba(233, 168, 0, 0.2);
 }
 
+.nav-link > .fab {
+  font-size: 1.3rem;
+}
 .site-footer {
   position: relative;
   padding-top: 10px;

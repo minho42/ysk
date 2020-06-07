@@ -7,15 +7,16 @@
 {% block content %}
 <div class="row justify-content-center mt-2 no-gutters">
   <div class="col-md-6">
+    <h4 class="text-center">호주->한국 / <span class="text-muted">${{ BASE_AMOUNT|intcomma }} 기준</span></h4>
     {% if currencies %}
     <table class="table table-sm table-hover">
       <thead>
         <tr>
-          <th>순위</th>
-          <th>업체</th>
-          <th>환율 (수수료포함)</th>
-          <th>환율</th>
-          <th>수수료</th>
+          <th>Rank</th>
+          <th>Company</th>
+          <th>Rate with fee</th>
+          <th>Rate</th>
+          <th>Fee</th>
         </tr>
       <tbody>
         {% for currency in currencies %}
@@ -63,7 +64,7 @@
     {% endif %}
 
     {% if last_fetch_time %}
-    <div class="text-center mb-4 text-muted">업데이트 {{ last_fetch_time|naturaltime }}</div>
+    <div class="text-center mb-4 text-muted">{{ last_fetch_time|naturaltime }}</div>
     {% endif %}
   </div>
 
