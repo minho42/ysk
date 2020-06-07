@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 
 REDIS_URL = get_env_variable("REDIS_URL")
 

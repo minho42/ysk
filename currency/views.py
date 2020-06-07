@@ -399,6 +399,17 @@ def get_old_api_data():
 
 
 @timeit
+def get_all():
+    """
+    No need to use "get_new_api_data" anymore since ditched chart/vue part
+    Count how many companies are to be fetched
+    Only save if the result count matches
+    Same all results at once rather than one by one to prevent user only seeing partial results
+    """
+    pass
+
+
+@timeit
 def get_new_api_data():
     # deleting all makes modified useless as created_at shares same value...
     Currency.objects.all().delete()
