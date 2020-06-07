@@ -107,24 +107,20 @@ REST_FRAMEWORK = {
     ],
 }
 
-# https://docs.djangoproject.com/en/2.1/ref/contrib/sites/#enabling-the-sites-framework
 SITE_ID = 1
 
 WSGI_APPLICATION = "ysk.wsgi.application"
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "currency",
+        "USER": "currencyuser",
+        "PASSWORD": get_env_variable("CURRENCY_DB_PASSWORD"),
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
