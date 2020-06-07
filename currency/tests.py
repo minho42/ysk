@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from .models import Currency
+from .views import round_it, get_real_rate
 
 
 class CurrencyModelTests(TestCase):
@@ -21,10 +22,10 @@ class CurrencyModelTests(TestCase):
                 name="same name", rate=123.45, fetch_time=timezone.now()
             )
         except:
-            # it's intended to raise exception
+            # It's intended to raise exception
             pass
         else:
-            raise self.failureException("unique name is not allowed")  # <-- typo?
+            raise self.failureException("Name is not unique")
 
 
 class CurrencyViewsTests(TestCase):
@@ -53,3 +54,12 @@ class CurrencyViewsTests(TestCase):
 
     def test_xpath(self):
         pass
+
+
+class CurrencyFunctionTests(TestCase):
+    def test_round_it(self):
+        pass
+
+    def test_get_real_rate(self):
+        pass
+
