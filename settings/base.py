@@ -23,7 +23,12 @@ SECRET_KEY = get_env_variable("CURRENCY_SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "audkrw.com"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "ysk.herokuapp.com",
+    "audkrw.com",
+]
 # <-- added for bebug_toolbar to appear
 INTERNAL_IPS = ["localhost", "127.0.0.1"]
 
@@ -146,9 +151,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
