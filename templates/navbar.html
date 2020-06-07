@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
 <nav class="navbar navbar-expand navbar-dark bg-dark">
   <div class="container">
@@ -11,6 +12,7 @@
         </li>
       </ul>
       <span class="navbar-text">호주->한국</span>
+      <span class="navbar-text ml-3">수수료 ${{ BASE_AMOUNT|intcomma }} 기준</span>
     </div>
   </div>
 </nav>
