@@ -68,7 +68,11 @@
     </table>
     {% endif %}
 
+    {% if last_fetch_time %}
     <div class="text-center mb-4 text-muted">업데이트 {{ last_fetch_time|naturaltime }}</div>
+    {% else %}
+    <div class="text-center mb-4 text-muted">업데이팅...</div>
+    {% endif %}
   </div>
 
 </div>
