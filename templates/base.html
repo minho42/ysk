@@ -34,7 +34,6 @@
     integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
     crossorigin="anonymous"></script>
 
-  <!-- My own CSS -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 
   <title>{% block title %}{% endblock title %}</title>
@@ -48,18 +47,14 @@
     <!-- <h4><span class="label label-primary">block from base.html</span></h4> -->
     {% endblock content %}
   </div>
-  <!-- /container -->
 
-  <!-- this button must come before 'scriptjs' -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
   {% block javascript %}{% endblock javascript %}
   <!-- javascript block must come after all the other scripts-->
 
   <footer class="site-footer">
     <ul class="site-footer-links">
       <li>audkrw.com</li>
-      <li> | 수수료 ${{ BASE_AMOUNT|intcomma }} 기준 | </li>
+      <li>수수료 ${{ BASE_AMOUNT|intcomma }} 기준</li>
       <li>
         <a href="https://twitter.com/minhokim42" target="_blank" rel="noopener noreferrer">
           <i class=" fab fa-twitter"></i>
