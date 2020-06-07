@@ -4,12 +4,6 @@
 
 {% block title %}호주 역송금 비교{% endblock title %}
 
-{% block javascript %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-<script src="{% static 'js/currency.js' %}"></script>
-{% endblock javascript %}
-
 {% block content %}
 <div class="row justify-content-center mt-2 no-gutters">
   <div class="col-md-6">
@@ -70,8 +64,6 @@
 
     {% if last_fetch_time %}
     <div class="text-center mb-4 text-muted">업데이트 {{ last_fetch_time|naturaltime }}</div>
-    {% else %}
-    <div class="text-center mb-4 text-muted">업데이팅...</div>
     {% endif %}
   </div>
 
