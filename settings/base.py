@@ -23,10 +23,7 @@ SECRET_KEY = get_env_variable("CURRENCY_SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "audkrw.com"]
 # <-- added for bebug_toolbar to appear
 INTERNAL_IPS = ["localhost", "127.0.0.1"]
 
