@@ -99,6 +99,7 @@ def scrape_gomtransfer():
 
         if rate:
             rate = re.findall(r"[\d,.]+", rate.strip())[0]
+            # TODO Make sure the fee is correct
             fee = 0
             return (rate, fee)
         else:
@@ -129,6 +130,7 @@ def scrape_wontop():
 
         if rate:
             rate = re.findall(r"[\d,.]+", rate.strip())[0]
+            # TODO Make sure the fee is correct
             fee = 0
             return (rate, fee)
         else:
@@ -159,6 +161,7 @@ def scrape_dondirect():
 
         if rate:
             rate = re.findall(r"[\d,.]+", rate.strip())[0]
+            # TODO Make sure the fee is correct
             fee = 0
             return (rate, fee)
         else:
@@ -194,6 +197,7 @@ def scrape_wirebarley():
         # Hardcoding fees based on $1000
         # TODO login to get fees
         # https://www.wirebarley.com/tx/create?r=KR&d=KRW&sa=1000&da=806197&cb=SOURCE -> will show fees
+        # Fee AUD 2.49
         fee = 2.49
     except KeyError:
         rate = 0
@@ -252,6 +256,8 @@ def scrape_commbank():
         for currency in rr["currencies"]:
             if currency["currencyTitle"] == "KRW":
                 rate = currency["bsImt"]
+                # TODO Scrape fee as well
+                # Transfer fee: 6 AUD
                 fee = 6
                 return (rate, fee)
     except KeyError:
@@ -287,6 +293,7 @@ def scrape_stra():
     rate = scrape_currency(
         "http://1472.com.au/", '//div[@class="aukr"]/div[@class="ex_bg"]/span'
     )
+    # TODO Login to scrape fee
     # NO FEE over $1000
     fee = 0
     return (rate, fee)
@@ -299,6 +306,8 @@ def scrape_wiztoss():
         "//h5[contains(text(), '1AUD')]",
         rate_regex="1AUD = ([\d,.]+)KRW",
     )
+    # TODO Login to scrape fee
+    # 환전 수수료 : 3AUD
     fee = 3
     return (rate, fee)
 
