@@ -14,38 +14,8 @@
   --tag-yellow: rgba(233, 168, 0, 0.2);
 }
 
-.nav-link > .fab {
-  font-size: 1.3rem;
-}
-.site-footer {
-  position: relative;
-  padding-top: 10px;
-  padding-bottom: 20px;
-  margin-top: 10px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #767676;
-  border-top: 1px solid #eee;
-  text-align: center;
-}
-.site-footer a,
-.site-footer a:hover {
-  color: #767676;
-  font-size: 1.2rem;
-}
-.site-footer ul {
-  padding: 0;
-}
-.site-footer-links li {
-  display: inline-block;
-  line-height: 16px;
-  margin-left: 1em;
-}
-
 a,
 a:hover {
-  /* color: var(--text-blue); */
-
   /* github link */
   color: var(--bg-blue);
 }
@@ -88,7 +58,7 @@ a:hover {
   white-space: nowrap;
   display: inline-block;
   color: var(--text-black);
-  height: 2rem;
+  /* height: 2rem; */
   line-height: 2rem;
   padding: 0 10px;
   -webkit-box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11),
@@ -101,16 +71,4 @@ a:hover {
   letter-spacing: 0.025em;
   -webkit-transition: all 0.15s ease;
   transition: all 0.15s ease;
-}
-
-.btn-white:hover {
-  color: var(--text-black);
-  background: #fff;
-  -webkit-box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
-    0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
-  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
-    0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
-  -webkit-box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),
-    0 3px 6px rgba(0, 0, 0, 0.08);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
