@@ -84,20 +84,6 @@ a:hover {
   box-shadow: none !important;
 }
 
-.btn {
-  /* color: #fff; */
-  /* padding: 5px 9px; */
-  /* text-transform: uppercase; */
-
-  /* btn-lg */
-  /* padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-  line-height: 1.5; */
-
-  /* font-size: 1rem; */
-  letter-spacing: 0.02em;
-}
-
 .btn-white {
   white-space: nowrap;
   display: inline-block;
@@ -128,10 +114,3 @@ a:hover {
     0 3px 6px rgba(0, 0, 0, 0.08);
   box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
-
-/* .currency-barchart-container {
-  width: 100%;
-  height: 320px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-} */
