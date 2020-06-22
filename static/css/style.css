@@ -72,3 +72,13 @@ a:hover {
   -webkit-transition: all 0.15s ease;
   transition: all 0.15s ease;
 }
+
+.contact-links a {
+  /* color: #212529; */
+  color: inherit;
+  padding: 0.5rem;
+}
+.contact-links a:hover {
+  text-decoration: none;
+  color: var(--bg-blue);
+}
