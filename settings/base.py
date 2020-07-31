@@ -1,4 +1,4 @@
-import django_heroku
+# import django_heroku
 import os
 
 from django.core.exceptions import ImproperlyConfigured
@@ -26,8 +26,6 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "ysk.herokuapp.com",
-    "audkrw.com",
 ]
 # <-- added for bebug_toolbar to appear
 INTERNAL_IPS = ["localhost", "127.0.0.1"]
@@ -188,4 +186,4 @@ CSRF_COOKIE_HTTPONLY = True
 SESSION_COOKIE_HTTPONLY = True
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
