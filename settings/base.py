@@ -1,4 +1,4 @@
-# import django_heroku
+import django_heroku
 import os
 
 from django.core.exceptions import ImproperlyConfigured
@@ -186,4 +186,4 @@ CSRF_COOKIE_HTTPONLY = True
 SESSION_COOKIE_HTTPONLY = True
 
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
