@@ -5,17 +5,21 @@
 {% block title %}호주 역송금 업체 환율 비교{% endblock title %}
 
 {% block content %}
-<div class="row justify-content-center mt-2 no-gutters">
+<div class="row justify-content-center no-gutters">
   <div class="col-md-6">
     {% if currencies %}
     <table class="table table-sm table-hover">
       <thead>
         <tr>
-          <th>Rank</th>
-          <th>Company</th>
-          <th>Rate with fee</th>
-          <th>Rate</th>
-          <th>Fee</th>
+          <th>No</th>
+          <th>업체</th>
+          <th>
+            <div class="text-muted small">수수료적용</div>
+            환율
+          </th>
+          <th>환율</th>
+
+          <th>수수료</th>
         </tr>
       <tbody>
         <tr>
