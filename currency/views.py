@@ -94,7 +94,7 @@ def scrape_gomtransfer():
         except NoSuchElementException:
             rate = 0
 
-        driver.close()
+        driver.quit()
 
         if rate:
             rate = re.findall(r"[\d,.]+", rate.strip())[0]
@@ -125,7 +125,7 @@ def scrape_wontop():
         except NoSuchElementException:
             rate = 0
 
-        driver.close()
+        driver.quit()
 
         if rate:
             rate = re.findall(r"[\d,.]+", rate.strip())[0]
@@ -156,7 +156,7 @@ def scrape_dondirect():
         except NoSuchElementException:
             rate = 0
 
-        driver.close()
+        driver.quit()
 
         if rate:
             rate = re.findall(r"[\d,.]+", rate.strip())[0]
