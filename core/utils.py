@@ -8,6 +8,7 @@ from functools import wraps
 from typing import List, Tuple
 
 import requests
+from django.conf import settings
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 
@@ -39,16 +40,22 @@ def get_chromedriver(headless: bool = True) -> object:
     options.add_argument("--remote-debugging-port=9222")
     options.add_experimental_option("prefs", prefs)
 
-    # try:
-    #     driver = webdriver.Chrome(CHROME_DRIVER_PATH, options=options)
-    # except WebDriverException as e:
-    #     driver = None
+    try:
+        if settings.DEBUG:
+            driver = webdriver.Chrome(
+                os.environ.get("CHROME_DRIVER_PATH"), options=options
+            )
+        else:
+            # Heroku
+            options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+            driver = webdriver.Chrome(
+                executable_path=os.environ.get("CHROME_DRIVER_PATH"),
+                chrome_options=options,
+            )
+    except WebDriverException:
+        driver = None
 
-    driver = webdriver.Chrome(
-        executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options
-    )
     return driver
 
 
