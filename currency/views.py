@@ -60,6 +60,10 @@ class CurrencyAPIViewOld(APIView):
         return Response(data)
 
 
+class Scraper:
+    pass
+
+
 def round_it(rate: float, ndigits: int = 2) -> float:
     return round(float(rate), ndigits)
 
@@ -79,7 +83,11 @@ def scrape_gomtransfer():
     driver = get_chromedriver()
 
     url = "https://www.gomtransfer.com/"
-    driver.get(url)
+    try:
+        driver.get(url)
+    except TimeoutException:
+        driver.quit()
+        return (0.0, None)
 
     try:
         element = WebDriverWait(driver, 10).until(
@@ -109,7 +117,11 @@ def scrape_wontop():
     driver = get_chromedriver()
 
     url = "http://www.wontop.com.au/"
-    driver.get(url)
+    try:
+        driver.get(url)
+    except TimeoutException:
+        driver.quit()
+        return (0.0, None)
 
     try:
         element = WebDriverWait(driver, 10).until(
@@ -141,8 +153,12 @@ def scrape_dondirect():
     # Using selenium to scrape as they used angular
     driver = get_chromedriver()
 
-    login_url = "https://dondirect.com.au/"
-    driver.get(login_url)
+    url = "https://dondirect.com.au/"
+    try:
+        driver.get(url)
+    except TimeoutException:
+        driver.quit()
+        return (0.0, None)
 
     try:
         element = WebDriverWait(driver, 10).until(
