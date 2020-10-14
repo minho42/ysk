@@ -1,18 +1,12 @@
-import datetime
-import json
 import os
-import pprint
 import re
 import time
 from functools import wraps
-from typing import List, Tuple
+from typing import List
 
-import requests
 from django.conf import settings
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
-
-# from django.apps import apps
 
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
 
@@ -60,10 +54,6 @@ def get_chromedriver(headless: bool = True) -> object:
 
 
 def get_all_fields(model) -> List[str]:
-    # print('---------------------------')
-    # pprint.pprint(model._meta.__dict__)
-    # print('---------------------------')
-
     r = []
     try:
         r = [f.name for f in model._meta.__dict__["local_fields"]]
@@ -72,23 +62,3 @@ def get_all_fields(model) -> List[str]:
     else:
         pass
     return r
-
-
-def get_m2m_fields(model) -> List[str]:
-    # 'many_to_many' or 'local_many_to_many'
-    return [f.name for f in model._meta.__dict__["local_many_to_many"]]
-
-
-def get_all_fields_excluding(model, exclude_list: List[str]) -> List[str]:
-    if type(exclude_list) is not list:
-        raise TypeError("exclude_list must be list")
-
-    include_list = get_all_fields(model)
-
-    for i in include_list:
-        for e in exclude_list:
-            e = e.strip()
-            if e in include_list:
-                include_list.remove(e)
-
-    return include_list
