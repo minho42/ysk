@@ -60,8 +60,20 @@ class CurrencyAPIViewOld(APIView):
         return Response(data)
 
 
-class Scraper:
-    pass
+class ChromeScraper:
+    def __init__(self):
+        self.driver = get_chromedriver(headless=True)
+
+    def __del__(self):
+        if self.driver:
+            self.driver.quit()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        if self.driver:
+            self.driver.quit()
 
 
 def round_it(rate: float, ndigits: int = 2) -> float:
