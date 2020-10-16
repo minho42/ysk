@@ -82,6 +82,9 @@ def round_it(rate: float, ndigits: int = 2) -> float:
 
 def get_real_rate(rate: float, fee: float) -> float:
     """Real reate with fees applied"""
+    rate = float(rate)
+    fee = float(fee)
+
     if not fee or fee == 0:
         return rate
     return round(((BASE_AMOUNT - fee) * rate), 2) / BASE_AMOUNT
@@ -193,6 +196,48 @@ def scrape_dondirect():
             return (rate, fee)
         else:
             return (0.0, None)
+
+
+def scrape_remitly():
+    # Remitly
+    # Using XHR
+
+    url = f"https://api.remitly.io/v2/pricing/estimates?amount={BASE_AMOUNT}%20AUD&anchor=SEND&conduit=AUS%3AAUD-KOR%3AKRW"
+    s = requests.session()
+    r = s.get(url=url)
+    rr = json.loads(r.text)
+
+    data = {}
+    for res in rr:
+        # BANK / DEBIT / CREDIT
+        if "payment_method" in res and res["payment_method"] == "BANK":
+            data = res
+
+    try:
+        base_rate = data["exchange_rate_info"]["base_rate"]
+        if (
+            "rate_promotion" in data["exchange_rate_info"]
+            and "promotional_rate" in data["exchange_rate_info"]["rate_promotion"]
+        ):
+            promotional_rate = data["exchange_rate_info"]["rate_promotion"][
+                "promotional_rate"
+            ]
+        rate = promotional_rate if promotional_rate else base_rate
+
+        # e.g. fee: 1.99 AUD
+        fee = data["fee_info"]["total_fee_amount"]
+    except KeyError:
+        rate = 0
+        fee = 0
+
+    if rate:
+        rate = re.findall(r"[\d,.]+", rate.strip())[0]
+        if fee:
+            fee = re.findall(r"[\d,.]+", fee.strip())[0]
+        return (rate, fee)
+    else:
+        return (0.0, None)
+    return (rate, fee)
 
 
 def scrape_wirebarley():
@@ -371,6 +416,11 @@ def save_wirebarley():
 
 
 @timeit
+def save_remitly():
+    return save_currency("Remitly", "https://www.remitly.com/", scrape_remitly)
+
+
+@timeit
 def save_wontop():
     return save_currency("Wontop", "http://www.wontop.com.au/", scrape_wontop)
 
@@ -460,6 +510,7 @@ def get_new_api_data():
         save_sodatransfer(),
         save_transferwise(),
         save_wirebarley(),
+        save_remitly(),
         # Using selenium
         save_dondirect(),
         save_wontop(),
