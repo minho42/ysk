@@ -18,6 +18,7 @@ dj-database-url==0.5.0
 Django==3.1.2
 django-celery-beat==2.0.0
 django-cors-headers==3.3.0
+django-environ==0.4.5
 django-heroku==0.3.1
 django-timezone-field==4.0
 djangorestframework==3.11.0
