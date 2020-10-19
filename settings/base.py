@@ -1,27 +1,19 @@
+from pathlib import Path
+
 import django_heroku
-import os
+import environ
 
-from django.core.exceptions import ImproperlyConfigured
-
-
-def get_env_variable(var_name):
-    """Get the environment variable or return exception."""
-    try:
-        return os.environ.get(var_name)
-    except KeyError:
-        error_msg = f"Set the {var_name} environment variable"
-        raise ImproperlyConfigured(error_msg)
+env = environ.Env(DEBUG=(bool, False))
+environ.Env.read_env()
 
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-SECRET_KEY = get_env_variable("CURRENCY_SECRET_KEY")
+SECRET_KEY = env("CURRENCY_SECRET_KEY")
 
-DEBUG = False
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -66,7 +58,7 @@ ROOT_URLCONF = "ysk.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -114,7 +106,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "currency",
         "USER": "currencyuser",
-        "PASSWORD": get_env_variable("CURRENCY_DB_PASSWORD"),
+        "PASSWORD": env("CURRENCY_DB_PASSWORD"),
         "HOST": "localhost",
         "PORT": "5432",
     }
@@ -130,10 +122,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# ??change format to en_AU
-# https://github.com/django/django/blob/master/django/conf/locale/en_AU/formats.py
-# from django.conf.locale.en import formats as en_formats
-# en_formats.DATETIME_FORMAT =
 LANGUAGE_CODE = "en-us"
 
 # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -147,19 +135,19 @@ USE_TZ = True
 
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 # http://whitenoise.evans.io/en/stable/django.html
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = ""
 EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = get_env_variable("")
+EMAIL_HOST_PASSWORD = ""
 EMAIL_PORT = "587"
 EMAIL_USE_TLS = True
 
