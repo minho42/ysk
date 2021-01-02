@@ -210,22 +210,13 @@ def scrape_remitly():
     data = {}
     for res in rr:
         # BANK / DEBIT / CREDIT
-        if "payment_method" in res and res["payment_method"] == "BANK":
+        if "payment_method" in res and res["payment_method"].upper() == "DEBIT":
             data = res
 
     try:
-        base_rate = data["exchange_rate_info"]["base_rate"]
-        if (
-            "rate_promotion" in data["exchange_rate_info"]
-            and "promotional_rate" in data["exchange_rate_info"]["rate_promotion"]
-        ):
-            promotional_rate = data["exchange_rate_info"]["rate_promotion"][
-                "promotional_rate"
-            ]
-        rate = promotional_rate if promotional_rate else base_rate
-
-        # e.g. fee: 1.99 AUD
-        fee = data["fee_info"]["total_fee_amount"]
+        rate = data["exchange_rate_info"]["base_rate"]
+        # e.g. fee: 3.99 AUD
+        fee = data["fee_info"]["product_fee_amount"]
     except KeyError:
         rate = 0
         fee = 0
