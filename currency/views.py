@@ -463,7 +463,6 @@ def save_wontop():
 
 @timeit
 def save_dondirect():
-    (rate, fee, note) = scrape_dondirect
     return save_currency("DonDirect", "https://dondirect.com.au/", scrape_dondirect)
 
 
