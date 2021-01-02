@@ -173,7 +173,7 @@ def scrape_dondirect():
         driver.get(url)
     except TimeoutException:
         driver.quit()
-        return (0.0, 0.0, None)
+        return (0.0, 0.0)
 
     try:
         element = WebDriverWait(driver, 10).until(
@@ -187,15 +187,15 @@ def scrape_dondirect():
         except NoSuchElementException:
             rate = 0
 
-        driver.quit()
-
         # 입금가능 / 입금불가
         try:
             note = driver.find_element_by_xpath(
                 "/html/body/div[2]/div/div[1]/md-content/div/span/div[1]/div[1]/div[1]/center[2]/div/div"
             ).text
-        except NoSuchElementException:
+        except:
             note = None
+
+        driver.quit()
 
         if rate:
             rate = re.findall(r"[\d,.]+", rate.strip())[0]
