@@ -306,20 +306,6 @@ def scrape_wirebarley():
     return (rate, fee)
 
 
-def scrape_sodatransfer():
-    # Using XHR
-    url = f"https://api.sodatransfer.com/api/transfers/calculate?corridor=AU-KR&sendingAmount={BASE_AMOUNT}"
-    r = requests.get(url)
-    rr = json.loads(r.text)
-    try:
-        rate = rr["exchangeRate"]["rate"]
-        fee = rr["finalFee"]
-    except KeyError:
-        rate = 0
-        fee = 0
-    return (rate, fee)
-
-
 def scrape_transferwise():
     # Using XHR
     url = f"https://transferwise.com/gateway/v3/comparisons?sendAmount={BASE_AMOUNT}&sourceCurrency=AUD&targetCurrency=KRW"
@@ -460,13 +446,6 @@ def save_dondirect():
 
 
 @timeit
-def save_sodatransfer():
-    return save_currency(
-        "SodaTransfer", "https://sodatransfer.com/", scrape_sodatransfer
-    )
-
-
-@timeit
 def save_gomtransfer():
     return save_currency(
         "GomTransfer", "https://www.gomtransfer.com/", scrape_gomtransfer
@@ -536,7 +515,6 @@ def get_new_api_data():
         save_wiztoss(),
         # Using requests, XHR
         save_commbank(),
-        save_sodatransfer(),
         save_transferwise(),
         save_wirebarley(),
         save_remitly(),
