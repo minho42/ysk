@@ -5,81 +5,57 @@
 {% block title %}호주 역송금 업체 환율 비교{% endblock title %}
 
 {% block content %}
-<div class="row justify-content-center no-gutters">
-  <div class="col-md-6">
-    {% if currencies %}
-    <table class="table table-sm table-hover">
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>업체</th>
-          <th>
-            <div class="small">수수료적용</div>
-            환율
-          </th>
-          <th>환율</th>
-          <th>수수료</th>
-        </tr>
-      <tbody>
-        {% for currency in currencies %}
-        <tr>
-          <td>
-            {% if currency.name == "Naver" %}
-            -
-            {% else %}
-            {{ forloop.counter0 }}
-            {% endif %}
-          </td>
-          <td>
-            <a href="{{ currency.url }}" target="_blank" rel="noopener noreferrer">{{ currency.name }}</a>
-          </td>
-          <td>
-            <span class="tag tag-green">
-              {{ currency.real_rate }}
-            </span>
-          </td>
-          <td class="text-muted">
-            <!-- <span class="tag tag-gray"> -->
-            {% if currency.real_rate == currency.rate %}
-            -
-            {% else %}
-            {{ currency.rate }}
-            {% endif %}
-            <!-- </span> -->
-          </td>
-          <td class="text-secondary">
-            {% if currency.fee == 0 %}
-            <!-- <span class="tag tag-gray"> -->
-            {{ currency.fee|floatformat|default_if_none:"?" }}
-            <!-- </span> -->
-            {% else %}
-            <span class="tag tag-red">
-              {{ currency.fee|default_if_none:"?" }}
-            </span>
-            {% endif %}
-          </td>
-        </tr>
-        {% if currency.note %}
-        <tr>
-          <td>
-            <!-- Empty -->
-          </td>
-          <td colspan="100%" class="text-secondary text-left">
-            {{ currency.name }}: {{ currency.note }}
-          </td>
-        </tr>
+<div id="list" class="flex flex-col items-center justify-between pt-2 pb-2 mx-4">
+  {% for currency in currencies %}
+  <div class="w-full md:w-1/2 flex items-start justify-start bg-white border-b border-gray-300 py-3">
+    <div class="text-3xl px-4 sm:px-6">
+      {% if currency.name == "Naver" %}
+      -
+      {% else %}
+      {{ forloop.counter0 }}
+      {% endif %}
+    </div>
+    <div class="w-full flex items-center justify-between">
+      <div class="">
+        <div class="text-3xl font-medium mb-1">
+          <a class="hover:text-blue-700" href="{{ currency.url }}" target="_blank" rel="noopener noreferrer">
+            {{ currency.name }}
+          </a>
+        </div>
+        {% if currency.real_rate != currency.rate %}
+        수수료적용전 환율:
+        <span class="bg-yellow-100 rounded-lg px-2 py-1">
+          {{ currency.rate }}
+        </span>
         {% endif %}
 
-        {% endfor %}
-      </tbody>
-      </thead>
-    </table>
-    {% endif %}
+        {% if currency.fee != 0 %}
+        <div>
+          수수료:
+          <span class="bg-red-100 rounded-lg px-2 py-1">
+            {{ currency.fee|default_if_none:"?" }}
+          </span>
+        </div>
+        {% endif %}
 
-    {% if last_fetch_time %}
-    <div class="text-center mb-4 text-muted">{{ last_fetch_time|naturaltime }}</div>
-    {% endif %}
+        {% if currency.note %}
+        <div class="bg-purple-100 rounded-lg px-2 py-1 mt-3">
+          * {{ currency.note }}
+        </div>
+        {% endif %}
+      </div>
+      <div class="">
+        <div class="text-3xl font-medium mr-3 sm:mr-8 font-mono">
+          {{ currency.real_rate }}
+        </div>
+      </div>
+    </div>
   </div>
+  {% endfor %}
+
+  {% if last_fetch_time %}
+  <div class="text-gray-800 my-4">{{ last_fetch_time|naturaltime }}</div>
+  {% endif %}
 
 </div>
 

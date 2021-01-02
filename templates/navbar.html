@@ -1,16 +1,19 @@
 {% load static %}
 
+<nav id="navbar">
+  <header class="bg-white flex justify-between border-b border-gray-300 shadow-sm">
+    <div class="flex items-center justify-between pl-3 py-2 h-16">
+      <div class="flex items-center">
+        <a href="{% url 'currency:list' %}" class=" px-1 py-1 font-bold text-2xl">
+          호주 역송금 비교
+        </a>
+      </div>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="{% url 'currency:list' %}">호주 역송금 비교</a>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'about' %}">About</a>
-        </li>
-      </ul>
-      <span class="navbar-text ml-3"></span>
     </div>
-  </div>
+    <div class="px-2 py-2 flex items-center">
+      <a href="{% url 'about' %}"
+        class="block px-3 py-2 ml-2 text-xl text-center rounded-lg border-none border-t border-gray-300 hover:bg-gray-200 mt-0">
+        About</a>
+    </div>
+  </header>
 </nav>
