@@ -393,7 +393,7 @@ def scrape_wiztoss():
         "//h5[contains(text(), '1AUD')]",
         rate_regex="1AUD = ([\d,.]+)KRW",
     )
-    # TODO Login to scrape fee
+    # TODO Fee hardcoded; Login to scrape fee
     # 환전 수수료 : 3AUD
     fee = 3
     return (rate, fee)
