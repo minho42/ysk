@@ -189,13 +189,21 @@ def scrape_dondirect():
 
         driver.quit()
 
+        # 입금가능 / 입금불가
+        try:
+            note = driver.find_element_by_xpath(
+                "/html/body/div[2]/div/div[1]/md-content/div/span/div[1]/div[1]/div[1]/center[2]/div/div"
+            ).text
+        except NoSuchElementException:
+            note = None
+
         if rate:
             rate = re.findall(r"[\d,.]+", rate.strip())[0]
             # TODO Make sure the fee is correct
             fee = 0
-            return (rate, fee)
+            return (rate, fee, note)
         else:
-            return (0.0, 0.0)
+            return (0.0, 0.0, note)
 
 
 def scrape_remitly():
@@ -400,7 +408,18 @@ def scrape_wiztoss():
 
 
 def save_currency(name: str, url: str, func: Callable) -> float:
-    (rate, fee) = func()
+    returned_values = func()
+    if len(returned_values) == 2:
+        (rate, fee) = func()
+        note = None
+    elif len(returned_values) == 3:
+        (rate, fee, note) = func()
+    else:
+        print(f"save_currency returned wrong tuple values: {func.__name__}")
+        rate = 0
+        fee = 0
+        note = None
+
     rate = round_it(rate)
     real_rate = get_real_rate(rate, fee)
     real_rate = round_it(real_rate)
@@ -412,6 +431,7 @@ def save_currency(name: str, url: str, func: Callable) -> float:
             "rate": rate,
             "fee": fee,
             "real_rate": real_rate,
+            "note": note,
             "modified": timezone.now(),
         },
     )
@@ -442,7 +462,8 @@ def save_wontop():
 
 @timeit
 def save_dondirect():
-    return save_currency("DonDirect", "https://dondirect.com.au/", scrape_dondirect)
+    (rate, fee, note) = scrape_dondirect
+    return save_currency("DonDirect", "https://dondirect.com.au/",)
 
 
 @timeit
