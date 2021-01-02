@@ -88,7 +88,6 @@ traitlets==4.3.3
 tweepy==3.9.0
 typed-ast==1.4.1
 typing-extensions==3.7.4.3
--e git+https://github.com/minho42/typofinder.git@afd126d0e7bb548f5ef197ff399f6e57da01c433#egg=typofinder
 urllib3==1.25.9
 vine==5.0.0
 wcwidth==0.2.5
