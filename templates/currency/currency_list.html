@@ -18,8 +18,8 @@
             환율
           </th>
           <th>환율</th>
-
           <th>수수료</th>
+          <th>노트</th>
         </tr>
       <tbody>
         {% for currency in currencies %}
@@ -57,6 +57,13 @@
             <span class="tag tag-red">
               {{ currency.fee|default_if_none:"?" }}
             </span>
+            {% endif %}
+          </td>
+          <td class="text-secondary">
+            {% if currency.note %}
+            {{ currency.note }}
+            {% else %}
+            -
             {% endif %}
           </td>
         </tr>
