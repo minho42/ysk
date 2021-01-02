@@ -102,7 +102,7 @@ def scrape_gomtransfer():
         driver.get(url)
     except TimeoutException:
         driver.quit()
-        return (0.0, None)
+        return (0.0, 0.0)
 
     try:
         element = WebDriverWait(driver, 10).until(
@@ -125,7 +125,7 @@ def scrape_gomtransfer():
             fee = 0
             return (rate, fee)
         else:
-            return (0.0, None)
+            return (0.0, 0.0)
 
 
 def scrape_wontop():
@@ -136,7 +136,7 @@ def scrape_wontop():
         driver.get(url)
     except TimeoutException:
         driver.quit()
-        return (0.0, None)
+        return (0.0, 0.0)
 
     try:
         element = WebDriverWait(driver, 10).until(
@@ -160,7 +160,7 @@ def scrape_wontop():
             fee = 0
             return (rate, fee)
         else:
-            return (0.0, None)
+            return (0.0, 0.0)
 
 
 def scrape_dondirect():
@@ -173,7 +173,7 @@ def scrape_dondirect():
         driver.get(url)
     except TimeoutException:
         driver.quit()
-        return (0.0, None)
+        return (0.0, 0.0)
 
     try:
         element = WebDriverWait(driver, 10).until(
@@ -195,7 +195,7 @@ def scrape_dondirect():
             fee = 0
             return (rate, fee)
         else:
-            return (0.0, None)
+            return (0.0, 0.0)
 
 
 def scrape_remitly():
@@ -236,7 +236,7 @@ def scrape_remitly():
             fee = re.findall(r"[\d,.]+", fee.strip())[0]
         return (rate, fee)
     else:
-        return (0.0, None)
+        return (0.0, 0.0)
     return (rate, fee)
 
 
