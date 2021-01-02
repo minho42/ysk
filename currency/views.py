@@ -264,13 +264,51 @@ def scrape_wirebarley():
     url2 = "https://www.wirebarley.com/api/tx/exrate/AU/AUD"
     r = s.get(url=url2, headers=headers)
     rr = json.loads(r.text)
+
+    # rr['data']['exRates']['KR'][0]['wbRateData']
+    # e.g. 199: 829.2932748 / 200: 829.628309
+    # 'wbRateData':
+    #     {'threshold': 200.0,
+    #     'wbRate': 829.2932748,
+    #     'threshold1': 500.0,
+    #     'wbRate1': 829.628309,
+    #     'threshold2': 1000.0,
+    #     'wbRate2': 829.7958261,
+    #     'threshold3': None,
+    #     'wbRate3': 830.0471017,
+    #     'threshold4': None,
+    #     'wbRate4': None,
+    #     'threshold5': None,
+    #     'wbRate5': None,
+    #     'threshold6': None,
+    #     'wbRate6': None,
+    #     'threshold7': None,
+    #     'wbRate7': None,
+    #     'threshold8': None,
+    #     'wbRate8': None,
+    #     'wbRate9': None,
+    #     'wbBonusRate': None}
+
+    #  e.g. 2999: 2.29 / 3000: 1.99
+    #  'transferFees': [{'option': 'BANK_ACCOUNT_KR',
+    #     'maxTransferAmount': None,
+    #     'country': 'KR',
+    #     'currency': 'KRW',
+    #     'useDiscountFee': False,
+    #     'min': 50.0,
+    #     'fee1': 2.49,
+    #     'discountFee1': 0.0,
+    #     'threshold1': 1000.0,
+    #     'fee2': 2.29,
+    #     'discountFee2': 0.0,
+    #     'threshold2': 3000.0,
+    #     'fee3': 1.99,
+    #     'discountFee3': 0.0,
+    #     'max': 6500.0}],
+
     try:
-        rate = rr["data"]["exRates"]["KR"][0]["wbRate"]
-        # Hardcoding fees based on $1000
-        # TODO login to get fees
-        # https://www.wirebarley.com/tx/create?r=KR&d=KRW&sa=1000&da=806197&cb=SOURCE -> will show fees
-        # Fee AUD 2.49
-        fee = 2.49
+        rate = rr["data"]["exRates"]["KR"][0]["wbRateData"]["wbRate3"]
+        fee = rr["data"]["exRates"]["KR"][0]["transferFees"][0]["fee2"]
     except KeyError:
         rate = 0
         fee = 0
