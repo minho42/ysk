@@ -60,11 +60,7 @@
             {% endif %}
           </td>
           <td class="text-secondary">
-            {% if currency.note %}
-            {{ currency.note }}
-            {% else %}
-            -
-            {% endif %}
+            {{ currency.note|default_if_none:"-" }}
           </td>
         </tr>
         {% endfor %}
