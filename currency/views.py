@@ -311,7 +311,8 @@ def scrape_wirebarley():
     except KeyError:
         rate = 0
         fee = 0
-    return (rate, fee)
+    note = "3000불이상 수수료할인"
+    return (rate, fee, note)
 
 
 def scrape_transferwise():
@@ -463,7 +464,7 @@ def save_wontop():
 @timeit
 def save_dondirect():
     (rate, fee, note) = scrape_dondirect
-    return save_currency("DonDirect", "https://dondirect.com.au/",)
+    return save_currency("DonDirect", "https://dondirect.com.au/", scrape_dondirect)
 
 
 @timeit
