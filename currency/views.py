@@ -173,7 +173,7 @@ def scrape_dondirect():
         driver.get(url)
     except TimeoutException:
         driver.quit()
-        return (0.0, 0.0)
+        return (0.0, 0.0, None)
 
     try:
         element = WebDriverWait(driver, 10).until(
