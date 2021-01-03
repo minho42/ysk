@@ -449,28 +449,28 @@ def save_transferwise():
 
 @timeit
 def save_wirebarley():
-    return save_currency("WireBarley", "https://www.wirebarley.com/", scrape_wirebarley)
+    return save_currency("WireBarley", "https://www.wirebarley.com", scrape_wirebarley)
 
 
 @timeit
 def save_remitly():
-    return save_currency("Remitly", "https://www.remitly.com/", scrape_remitly)
+    return save_currency("Remitly", "https://www.remitly.com", scrape_remitly)
 
 
 @timeit
 def save_wontop():
-    return save_currency("Wontop", "http://www.wontop.com.au/", scrape_wontop)
+    return save_currency("Wontop", "http://www.wontop.com.au", scrape_wontop)
 
 
 @timeit
 def save_dondirect():
-    return save_currency("DonDirect", "https://dondirect.com.au/", scrape_dondirect)
+    return save_currency("DonDirect", "https://dondirect.com.au", scrape_dondirect)
 
 
 @timeit
 def save_gomtransfer():
     return save_currency(
-        "GomTransfer", "https://www.gomtransfer.com/", scrape_gomtransfer
+        "GomTransfer", "https://www.gomtransfer.com", scrape_gomtransfer
     )
 
 
@@ -485,7 +485,7 @@ def save_naver():
 
 @timeit
 def save_wiztoss():
-    return save_currency("Wiztoss", "https://wiztoss.com/", scrape_wiztoss)
+    return save_currency("Wiztoss", "https://wiztoss.com", scrape_wiztoss)
 
 
 @timeit
@@ -499,7 +499,7 @@ def save_commbank():
 
 @timeit
 def save_stra():
-    return save_currency("Stra", "http://1472.com.au/", scrape_stra)
+    return save_currency("Stra", "http://1472.com.au", scrape_stra)
 
 
 def get_old_api_data():
