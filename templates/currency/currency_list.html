@@ -5,7 +5,7 @@
 {% block title %}호주 역송금 업체 환율 비교{% endblock title %}
 
 {% block content %}
-<div id="list" class="flex flex-col items-center justify-between pt-2 pb-2 mx-4">
+<div id="list" class="flex flex-col items-center justify-between pt-2 pb-2 mx-2">
   {% for currency in currencies %}
   <div class="w-full md:w-1/2 flex items-start justify-start bg-white border-b border-gray-300 py-3">
     <div class="text-3xl px-4 sm:px-6">
@@ -23,8 +23,8 @@
           </a>
         </div>
         {% if currency.real_rate != currency.rate %}
-        수수료적용전 환율:
-        <span class="bg-yellow-100 rounded-lg px-2 py-1">
+        수수료없이:
+        <span class="">
           {{ currency.rate }}
         </span>
         {% endif %}
@@ -39,13 +39,13 @@
         {% endif %}
 
         {% if currency.note %}
-        <div class="bg-purple-100 rounded-lg px-2 py-1 mt-3">
+        <div class="bg-yellow-100 rounded-lg px-2 py-1 mt-3">
           * {{ currency.note }}
         </div>
         {% endif %}
       </div>
       <div class="">
-        <div class="text-3xl font-medium mr-3 sm:mr-8 font-mono">
+        <div class="text-2xl font-medium mr-3 sm:mr-8 font-mono bg-purple-100 rounded-lg px-2 py-1">
           {{ currency.real_rate }}
         </div>
       </div>
