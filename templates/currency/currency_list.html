@@ -8,7 +8,7 @@
 <div id="list" class="flex flex-col items-center justify-between pt-2 pb-2 mx-2">
   {% for currency in currencies %}
   <div class="w-full md:w-1/2 flex items-start justify-start bg-white border-b border-gray-300 py-3">
-    <div class="text-2xl px-2 sm:px-6 text-gray-500">
+    <div class="text-2xl px-2 sm:px-6 text-gray-600">
       {% if currency.name == "Naver" %}
       -
       {% else %}
@@ -24,7 +24,7 @@
         </div>
 
         {% if currency.real_rate != currency.rate %}
-        <div class="text-gray-500">
+        <div class="text-gray-600">
           수수료없이:
           <span class="">
             {{ currency.rate }}
@@ -33,16 +33,16 @@
         {% endif %}
 
         {% if currency.fee != 0 %}
-        <div class="text-gray-500">
+        <div class="text-gray-600">
           수수료:
-          <span class="bg-red-100 rounded-lg px-2">
+          <span class="">
             {{ currency.fee|default_if_none:"?" }}
           </span>
         </div>
         {% endif %}
 
         {% if currency.note %}
-        <div class="bg-yellow-100 rounded-lg px-2 mt-3 text-gray-500">
+        <div class="bg-yellow-100 rounded-lg px-2 mt-3 text-gray-600">
           * {{ currency.note }}
         </div>
         {% endif %}
