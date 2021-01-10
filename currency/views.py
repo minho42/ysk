@@ -192,6 +192,8 @@ def scrape_dondirect():
             note = driver.find_element_by_xpath(
                 "/html/body/div[2]/div/div[1]/md-content/div/span/div[1]/div[1]/div[1]/center[2]/div/div"
             ).text
+            if not "입금불가" in note:
+                note = None
         except:
             note = None
 
