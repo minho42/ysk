@@ -405,9 +405,17 @@ def scrape_wiztoss():
         "//h5[contains(text(), '1AUD')]",
         rate_regex="1AUD = ([\d,.]+)KRW",
     )
-    # TODO Fee hardcoded; Login to scrape fee
-    # 환전 수수료 : 3AUD
-    fee = 3
+    s = requests.session()
+    rr = s.get("https://wiztoss.com/faq-exchange-transfer")
+    node2 = html.fromstring(rr.content)
+    fee = node2.xpath(
+        "//h5[contains(text(), '수수료가 있나요')]/ancestor::div[@class='card-header']/following-sibling::div//p"
+    )
+    if len(fee) <= 0:
+        fee = 0
+    fee = fee[0].text.strip()
+    fee = re.findall(r"\$([\d,.]+)", fee)[0]
+
     return (rate, fee)
 
 
