@@ -355,13 +355,21 @@ def scrape_commbank():
         for currency in rr["currencies"]:
             if currency["currencyTitle"] == "KRW":
                 rate = currency["bsImt"]
-                # TODO Scrape fee as well
-                # Transfer fee: 6 AUD
-                fee = 6
-                return (rate, fee)
+                break
     except KeyError:
         pass
-    return 0.0, None
+
+    fee = 0
+    fee_url = "https://www.commbank.com.au/personal/international/international-money-transfer.html"
+    r = requests.get(fee_url)
+    node = html.fromstring(r.content)
+    try:
+        text = node.xpath('//div[@class="target parbase"]//p')[0].text
+        fee = re.findall(r"\$([\d,.]+)", text.strip())[0]
+    except:
+        fee = 0
+
+    return (rate, fee)
 
 
 def scrape_currency(url, xpath, rate_regex="[\d,.]+"):
