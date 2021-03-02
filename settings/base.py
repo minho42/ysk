@@ -113,9 +113,7 @@ DATABASES = {
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -158,19 +156,5 @@ CELERY_RESULT_SERIALIZER = "json"
 # CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = "Australia/ACT"
 CELERY_TASK_SOFT_TIME_LIMIT = 120
-
-
-# Security
-X_FRAME_OPTIONS = "DENY"
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-# SECURE_HSTS_SECONDS = 31536000
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_SSL_REDIRECT = True
-# CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
-# SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
-
 
 django_heroku.settings(locals())
