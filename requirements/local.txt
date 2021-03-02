@@ -1,0 +1,10 @@
+-r base.txt
+django-debug-toolbar
+ipdb
+ipython
+pytest
+pytest-django
+more-itertools
+django-extensions
+autopep8
+black
