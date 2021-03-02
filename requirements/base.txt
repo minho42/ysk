@@ -15,4 +15,5 @@ psycopg2-binary
 redis
 requests
 selenium
+sentry-sdk
 whitenoise
