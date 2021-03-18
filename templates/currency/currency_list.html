@@ -6,58 +6,74 @@
 
 {% block content %}
 <div id="list" class="flex flex-col items-center justify-between pt-2 pb-2 mx-2">
-  {% for currency in currencies %}
-  <div class="w-full md:w-1/2 flex items-start justify-start bg-white border-b border-gray-300 py-3">
-    <div class="text-2xl px-2 sm:px-6 text-gray-600">
-      {% if currency.name == "Naver" %}
-      -
-      {% else %}
-      {{ forloop.counter0 }}.
-      {% endif %}
-    </div>
-    <div class="w-full flex items-center justify-between">
-      <div class="">
-        <div class="text-2xl font-medium mb-1">
-          <a class="hover:text-blue-700" href="{{ currency.url }}" target="_blank" rel="noopener noreferrer">
+
+  <table class="table-auto">
+    <thead>
+      <tr class="border-b-2 border-gray-300 dark:border-gray-700">
+        <th class="font-medium">No</th>
+        <th class="font-medium">Name</th>
+        <th class="font-medium">Rate</th>
+        <th class="font-medium">Fee</th>
+        <th class="font-medium">Real rate</th>
+        <th class="font-medium">Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for currency in currencies %}
+      <tr class="border-b border-gray-300 dark:border-gray-700">
+        <td>
+          {% if currency.name == "Naver" %}
+          -
+          {% else %}
+          {{ forloop.counter0 }}.
+          {% endif %}
+        </td>
+        <td class="py-1">
+          <a class="px-1 text-blue-600 dark:text-blue-400 dark:hover:text-blue-400 hover:underline"
+            href="{{ currency.url }}" target="_blank" rel="noopener noreferrer">
             {{ currency.name }}
           </a>
-        </div>
-
-        {% if currency.real_rate != currency.rate %}
-        <div class="text-gray-600">
-          수수료없이:
-          <span class="">
+        </td>
+        <td>
+          {% if currency.real_rate != currency.rate %}
+          <div class="px-1 text-gray-500">
             {{ currency.rate }}
-          </span>
-        </div>
-        {% endif %}
-
-        {% if currency.fee != 0 %}
-        <div class="text-gray-600">
-          수수료:
-          <span class="">
+          </div>
+          {% else %}
+          -
+          {% endif %}
+        </td>
+        <td>
+          {% if currency.real_rate != currency.rate %}
+          <div class="inline-flex bg-red-100 dark:bg-transparent dark:text-pink-400 rounded-md px-1">
             {{ currency.fee|default_if_none:"?" }}
-          </span>
-        </div>
-        {% endif %}
+          </div>
+          {% else %}
+          -
+          {% endif %}
+        </td>
+        <td class="">
+          <div class="inline-flex bg-blue-100 dark:bg-transparent dark:text-green-400 rounded-md px-2">
+            {{ currency.real_rate }}
+          </div>
+        </td>
+        <td class="">
+          {% if currency.note %}
+          <div class="inline-flex dark:text-yellow-400 px-1">
+            {{currency.note|truncatechars:6}}
+          </div>
+          {% else %}
+          {% endif %}
+          <!-- {{ currency.note|default_if_none:"" }} -->
+        </td>
+      </tr>
+      {% endfor %}
 
-        {% if currency.note %}
-        <div class="bg-yellow-100 rounded-lg px-2 mt-3 text-gray-600">
-          * {{ currency.note }}
-        </div>
-        {% endif %}
-      </div>
-      <div class="">
-        <div class="text-2xl font-medium mr-3 sm:mr-8 font-mono bg-purple-100 rounded-lg px-2 py-1">
-          {{ currency.real_rate }}
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
+    </tbody>
+  </table>
 
   {% if last_fetch_time %}
-  <div class="text-gray-800 my-4">{{ last_fetch_time|naturaltime }}</div>
+  <div class="text-gray-800 dark:text-gray-400 my-3">{{ last_fetch_time|naturaltime }}</div>
   {% endif %}
 
 </div>
