@@ -3,7 +3,7 @@ from celery.schedules import crontab
 
 from ysk.celery import app
 
-from .views import get_new_api_data
+from .views import fetch_new_data
 
 
 @app.on_after_finalize.connect
@@ -13,4 +13,4 @@ def setup_periodic_tasks(sender, **kwargs):
 
 @app.task
 def fetch_all():
-    get_new_api_data()
+    fetch_new_data()

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     # third party apps
+    "corsheaders",
     "rest_framework",
     "rest_framework.authtoken",
     "django_celery_beat",
@@ -84,6 +85,7 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:3000",
     "https://127.0.0.1:8080",
     "https://127.0.0.1:8000",
+    "https://audkrw.netlify.app",
 )
 
 REST_FRAMEWORK = {

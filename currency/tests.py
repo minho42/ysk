@@ -14,13 +14,9 @@ class CurrencyModelTests(TestCase):
         self.assertLess(c.created_at, timezone.now())
 
     def test_currency_unique_name(self):
-        Currency.objects.create(
-            name="same name", rate=123.45, fetch_time=timezone.now()
-        )
+        Currency.objects.create(name="same name", rate=123.45, fetch_time=timezone.now())
         try:
-            Currency.objects.create(
-                name="same name", rate=123.45, fetch_time=timezone.now()
-            )
+            Currency.objects.create(name="same name", rate=123.45, fetch_time=timezone.now())
         except:
             # It's intended to raise exception
             pass
@@ -46,14 +42,14 @@ class CurrencyViewsTests(TestCase):
     #     # this doesn't work with those who use selenium to fetch...
     #     self.assertGreater(len(data), 0)
 
-    def test_currency_api_old(self):
-        response = self.client.get(reverse("currency:api_old"))
-        self.assertEqual(response.status_code, 200)
-        data = json.loads(response.content)
-        self.assertGreater(len(data), 0)
+    # def test_currency_api_old(self):
+    #     response = self.client.get(reverse("currency:api_old"))
+    #     self.assertEqual(response.status_code, 200)
+    #     data = json.loads(response.content)
+    #     self.assertGreater(len(data), 0)
 
-    def test_xpath(self):
-        pass
+    # def test_xpath(self):
+    #     pass
 
 
 class CurrencyFunctionTests(TestCase):
@@ -62,4 +58,3 @@ class CurrencyFunctionTests(TestCase):
 
     def test_get_real_rate(self):
         pass
-

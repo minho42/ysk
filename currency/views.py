@@ -3,61 +3,37 @@ import re
 import types
 from datetime import datetime
 from typing import Callable, Tuple, Union
+from django.views import generic
 
 import requests
+from core.utils import get_chromedriver, timeit
 from django.http import JsonResponse
 from django.utils import timezone
 from django.utils.timesince import timesince
 from django.views.generic import ListView
 from lxml import html
+from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from core.utils import get_chromedriver, timeit
-
 from .models import Currency
+from .serializers import CurrencySerializer
 
 BASE_AMOUNT = 1000
 
 
-class CurrencyView(ListView):
-    model = Currency
-    template_name = "currency/currency_list.html"
-    context_object_name = "currencies"
+class CurrencyAPIViewData(generics.ListAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = CurrencySerializer
+    http_method_names = ["get"]
 
     def get_queryset(self):
-        return Currency.objects.order_by("-real_rate", "name")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        try:
-            last_fetch_time = Currency.objects.order_by("modified").last().modified
-        except:
-            last_fetch_time = None
-        context["last_fetch_time"] = last_fetch_time
-        return context
-
-
-class CurrencyAPIViewNew(APIView):
-    authentication_classes = []
-    permission_classes = []
-
-    def get(self, request, format=None):
-        data = get_new_api_data()
-        return Response(data)
-
-
-class CurrencyAPIViewOld(APIView):
-    authentication_classes = []
-    permission_classes = []
-
-    def get(self, request, format=None):
-        data = get_old_api_data()
-        return Response(data)
+        return Currency.objects.order_by("-real_rate")
 
 
 class ChromeScraper:
@@ -507,61 +483,32 @@ def save_commbank():
 def save_stra():
     return save_currency("Stra", "http://1472.com.au", scrape_stra)
 
-
-def get_old_api_data():
-    all = Currency.objects.all().order_by("-real_rate")
-    if not all:
-        return {}
-    labels = all.values_list("name", flat=True)
-    rates = all.values_list("real_rate", flat=True)
-    modified = Currency.objects.latest("modified").modified
-
-    data = {"labels": labels, "rates": rates, "modified": timesince(modified)}
-    return data
-
-
-@timeit
-def get_all():
+    # @timeit
+    # def get_all():
     """
-    No need to use "get_new_api_data" anymore since ditched chart/vue part
+    No need to use "fetch_new_data" anymore since ditched chart/vue part
     Count how many companies are to be fetched
     Only save if the result count matches
     Same all results at once rather than one by one to prevent user only seeing partial results
     """
-    pass
+    # pass
 
 
 @timeit
-def get_new_api_data():
+def fetch_new_data():
     # deleting all makes modified useless as created_at shares same value...
     # Currency.objects.all().delete()
 
-    currencies = [
-        # Using requests
-        save_naver(),
-        save_stra(),
-        save_wiztoss(),
-        # Using requests, XHR
-        save_commbank(),
-        save_transferwise(),
-        save_wirebarley(),
-        save_remitly(),
-        # Using selenium
-        save_dondirect(),
-        save_wontop(),
-        save_gomtransfer(),
-    ]
-
-    currencies = sorted(currencies, key=lambda Currency: Currency.real_rate, reverse=True)
-    [print(f"{c.name}: {c.rate}") for c in currencies]
-
-    labels = []
-    rates = []
-    modified = Currency.objects.latest("modified").modified
-
-    for c in currencies:
-        labels.append(c.name)
-        rates.append(c.real_rate)
-
-    data = {"labels": labels, "rates": rates, "modified": timesince(modified)}
-    return data
+    # Using requests
+    save_naver(),
+    save_stra(),
+    save_wiztoss(),
+    # Using requests, XHR
+    save_commbank(),
+    save_transferwise(),
+    save_wirebarley(),
+    save_remitly(),
+    # Using selenium
+    save_dondirect(),
+    save_wontop(),
+    save_gomtransfer(),
