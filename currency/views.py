@@ -139,9 +139,7 @@ def scrape_wontop():
         return (0.0, 0.0)
 
     try:
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div/aside[@id='text-11']"))
-        )
+        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div/aside[@id='text-11']")))
     finally:
         # <iframe class="resp-iframe" style="height: 210px;" src="http://wontop.com.au/wp-content/myfiles/au2kr9.php" frameborder="0"></iframe>
         iframe = driver.find_element_by_xpath("//iframe[@class='resp-iframe']")
@@ -176,9 +174,7 @@ def scrape_dondirect():
         return (0.0, 0.0)
 
     try:
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "ng-binding"))
-        )
+        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "ng-binding")))
     finally:
         try:
             rate = driver.find_element_by_xpath(
@@ -235,8 +231,9 @@ def scrape_remitly():
         rate = re.findall(r"[\d,.]+", rate.strip())[0]
         if fee:
             fee = re.findall(r"[\d,.]+", fee.strip())[0]
-        note = "프로모션 적용안함; 수수료 Express delivery 기준"
-        return (rate, fee, note)
+        # note = "프로모션 적용안함; 수수료 Express delivery 기준"
+        # return (rate, fee, note)
+        return (rate, fee)
     else:
         return (0.0, 0.0)
     return (rate, fee)
@@ -314,8 +311,9 @@ def scrape_wirebarley():
     except KeyError:
         rate = 0
         fee = 0
-    note = "3000불이상 수수료할인"
-    return (rate, fee, note)
+    # note = "3000불이상 수수료할인"
+    # return (rate, fee, note)
+    return (rate, fee)
 
 
 def scrape_transferwise():
@@ -345,9 +343,7 @@ def scrape_commbank():
     # Commbank, foreign exchange rates
     # Using XHR
     timestamp = get_timestamp()
-    url = (
-        f"https://www.commbank.com.au/content/data/forex-rates/AUD.json?dt={timestamp}"
-    )
+    url = f"https://www.commbank.com.au/content/data/forex-rates/AUD.json?dt={timestamp}"
     r = requests.get(url)
     rr = json.loads(r.text)
 
@@ -397,9 +393,7 @@ def scrape_naver():
 
 
 def scrape_stra():
-    rate = scrape_currency(
-        "http://1472.com.au/", '//div[@class="aukr"]/div[@class="ex_bg"]/span'
-    )
+    rate = scrape_currency("http://1472.com.au/", '//div[@class="aukr"]/div[@class="ex_bg"]/span')
     # TODO Login to scrape fee
     # NO FEE over $1000
     fee = 0
@@ -416,9 +410,7 @@ def scrape_wiztoss():
     s = requests.session()
     rr = s.get("https://wiztoss.com/faq-exchange-transfer")
     node2 = html.fromstring(rr.content)
-    fee = node2.xpath(
-        "//h5[contains(text(), '수수료가 있나요')]/ancestor::div[@class='card-header']/following-sibling::div//p"
-    )
+    fee = node2.xpath("//h5[contains(text(), '수수료가 있나요')]/ancestor::div[@class='card-header']/following-sibling::div//p")
     if len(fee) <= 0:
         fee = 0
     fee = fee[0].text.strip()
@@ -460,9 +452,7 @@ def save_currency(name: str, url: str, func: Callable) -> float:
 
 @timeit
 def save_transferwise():
-    return save_currency(
-        "TransferWise", "https://transferwise.com/au", scrape_transferwise
-    )
+    return save_currency("TransferWise", "https://transferwise.com/au", scrape_transferwise)
 
 
 @timeit
@@ -487,9 +477,7 @@ def save_dondirect():
 
 @timeit
 def save_gomtransfer():
-    return save_currency(
-        "GomTransfer", "https://www.gomtransfer.com", scrape_gomtransfer
-    )
+    return save_currency("GomTransfer", "https://www.gomtransfer.com", scrape_gomtransfer)
 
 
 @timeit
@@ -564,9 +552,7 @@ def get_new_api_data():
         save_gomtransfer(),
     ]
 
-    currencies = sorted(
-        currencies, key=lambda Currency: Currency.real_rate, reverse=True
-    )
+    currencies = sorted(currencies, key=lambda Currency: Currency.real_rate, reverse=True)
     [print(f"{c.name}: {c.rate}") for c in currencies]
 
     labels = []
