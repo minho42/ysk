@@ -46,15 +46,7 @@ export default {
     CurrencyItem,    
   },
   methods: {
-    
-  },
-  async created() {
-    // Ping heroku
-    const res = await fetch('https://ysk.herokuapp.com')
-    const { data } = await res.json()
-    console.log(data)   
-  },
-  async mounted() {
+    async fetch() {
       const res = await fetch('https://ysk.herokuapp.com/data')
       // const res = await fetch('http://localhost:8000/data')
       const data = await res.json()
@@ -67,6 +59,17 @@ export default {
           this.lastUpdate = formatDistance(new Date(lastUpdate), new Date()) + ' ago'
         }
       }
+    }
+  },
+  async created() {
+    // Ping heroku
+    const res = await fetch('https://ysk.herokuapp.com')
+    const { data } = await res.json()
+    console.log(data)   
+  },
+  async mounted() {
+    this.fetch()
+    setInterval(this.fetch, 60*1000)
   },
   computed: {
     
