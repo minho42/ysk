@@ -20,7 +20,7 @@ from sentry_sdk.integrations.celery import CeleryIntegration
 from sentry_sdk.integrations.redis import RedisIntegration
 
 sentry_sdk.init(
-    dsn="https://0ef35c90768b486e89b1e52933eff293@o410328.ingest.sentry.io/5656262",
+    dsn="https://8ad54f2c1f0e40c7a0d7f071810f263f@o410328.ingest.sentry.io/5683153",
     integrations=[DjangoIntegration(), CeleryIntegration(), RedisIntegration()],
     # If you wish to associate users to errors (assuming you are using
     # django.contrib.auth) you may enable sending PII data.
