@@ -5,7 +5,7 @@
     </div>
     <table v-else class="table-auto">
       <thead>
-        <tr class="border-b-2 border-gray-300 dark:border-gray-700">
+        <tr class="border-b-2 border-gray-700">
           <th class="font-medium">No</th>
           <th class="font-medium">Name</th>
           <th class="font-medium">Real rate</th>

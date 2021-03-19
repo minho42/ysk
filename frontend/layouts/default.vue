@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute inset-0 text-gray-800 dark:text-gray-300 dark:bg-gray-900">
+  <div class="text-gray-300">
     <Navbar />
     <Nuxt />
     <Footer />
@@ -16,3 +16,10 @@ export default {
   }
 }
 </script>
+
+<style>
+body {
+  /* github dark navbar */
+  background-color: #161b21;
+}
+</style>
