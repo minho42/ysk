@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen text-gray-800 dark:text-gray-300 dark:bg-gray-900">
+  <div class="absolute inset-0 text-gray-800 dark:text-gray-300 dark:bg-gray-900">
     <Navbar />
     <Nuxt />
     <Footer />
