@@ -14,6 +14,11 @@
         {{ name }}
       </a>
     </td>
+    <td class="">
+      <div class="inline-flex bg-blue-100 dark:bg-transparent dark:text-green-400 rounded-md px-2">
+        {{ real_rate }}
+      </div>
+    </td>
     <td>
       <div v-if="rate !== real_rate" class="px-1 text-gray-400">
         {{ rate }}
@@ -28,11 +33,6 @@
       </div>
       <div v-else class="text-center">
         -
-      </div>
-    </td>
-    <td class="">
-      <div class="inline-flex bg-blue-100 dark:bg-transparent dark:text-green-400 rounded-md px-2">
-        {{ real_rate }}
       </div>
     </td>
     <td class="">

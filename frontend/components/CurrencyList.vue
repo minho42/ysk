@@ -8,9 +8,9 @@
         <tr class="border-b-2 border-gray-300 dark:border-gray-700">
           <th class="font-medium">No</th>
           <th class="font-medium">Name</th>
+          <th class="font-medium">Real rate</th>
           <th class="font-medium">Rate</th>
           <th class="font-medium">Fee</th>
-          <th class="font-medium">Real rate</th>
           <th class="font-medium">Note</th>
         </tr>
       </thead>
