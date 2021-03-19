@@ -1,5 +1,5 @@
 <template>
-  <div class="text-gray-800 dark:text-gray-300 dark:bg-gray-900">
+  <div>
     <CurrencyList />      
   </div>
 </template>

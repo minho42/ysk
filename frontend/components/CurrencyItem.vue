@@ -15,7 +15,7 @@
       </a>
     </td>
     <td>
-      <div v-if="rate === real_rate" class="px-1 text-gray-500">
+      <div v-if="rate === real_rate" class="px-1 text-gray-400">
         {{ rate }}
       </div>
       <div v-else>

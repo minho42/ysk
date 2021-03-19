@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="text-gray-800 dark:text-gray-300">
     <Navbar />
     <Nuxt />
   </div>
@@ -13,3 +13,10 @@ export default {
   }
 }
 </script>
+
+<style>
+body {
+  /* from github */
+  background-color: #0d1017;
+}
+</style>
