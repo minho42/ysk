@@ -8,7 +8,9 @@ from django.conf import settings
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 
-USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
+USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
+)
 
 
 def timeit(func):
@@ -36,15 +38,13 @@ def get_chromedriver(headless: bool = True) -> object:
 
     try:
         if settings.DEBUG:
-            driver = webdriver.Chrome(
-                os.environ.get("CHROME_DRIVER_PATH"), options=options
-            )
+            driver = webdriver.Chrome(os.environ.get("CHROME_DRIVER_PATH"), options=options)
         else:
             # Heroku
             options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
             driver = webdriver.Chrome(
-                executable_path=os.environ.get("CHROME_DRIVER_PATH"),
+                executable_path=os.environ.get("CHROMEDRIVER_PATH"),
                 chrome_options=options,
             )
     except WebDriverException:
