@@ -41,7 +41,7 @@ class CurrencyAPIViewData(generics.ListAPIView):
     http_method_names = ["get"]
 
     def get_queryset(self):
-        return Currency.objects.order_by("-real_rate")
+        return Currency.objects.order_by("-real_rate", "name")
 
 
 class ChromeScraper:
