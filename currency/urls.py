@@ -5,5 +5,6 @@ from . import views
 app_name = "currency"
 
 urlpatterns = [
-    path("api/data/", views.CurrencyAPIViewData.as_view(), name="api_data"),
+    path("", views.CurrencyHome.as_view(), name="home"),
+    path("data/", views.CurrencyAPIViewData.as_view(), name="data"),
 ]

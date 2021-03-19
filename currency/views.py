@@ -27,6 +27,14 @@ from .serializers import CurrencySerializer
 BASE_AMOUNT = 1000
 
 
+class CurrencyHome(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    http_method_names = ["get"]
+
+    def get(self, request):
+        return Response({"data": "It's working!"})
+
+
 class CurrencyAPIViewData(generics.ListAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = CurrencySerializer
