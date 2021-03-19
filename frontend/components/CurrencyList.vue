@@ -58,9 +58,11 @@ export default {
       console.log(data)    
       this.currencies = data
       
-      const lastUpdate = data[0].modified
-      if (lastUpdate) {
-        this.lastUpdate = formatDistance(new Date(lastUpdate), new Date()) + ' ago'
+      if (data && data.length > 0) {
+        const lastUpdate = data[0].modified
+        if (lastUpdate) {
+          this.lastUpdate = formatDistance(new Date(lastUpdate), new Date()) + ' ago'
+        }
       }
   },
   computed: {
