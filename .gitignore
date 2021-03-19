@@ -16,8 +16,6 @@ credentials.json
 ngrok
 token.json
 .flake8
-package.json
-package-lock.json
 staticfiles/
 chromedriver
 celerybeat-schedule.db
