@@ -41,13 +41,6 @@ def get_chromedriver(headless: bool = True) -> object:
             driver = webdriver.Chrome(os.environ.get("CHROME_DRIVER_PATH"), options=options)
         else:
             # Heroku
-            print("@@@@@")
-            print(os.environ.get("GOOGLE_CHROME_BIN"))
-            print(
-                os.environ.get("CHROMEDRIVER_PATH"),
-            )
-            print("@@@@@")
-
             options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
             driver = webdriver.Chrome(
