@@ -1,6 +1,9 @@
 <template>
   <div id="list" class="flex flex-col items-center justify-between pt-2 pb-2 mx-2">
-    <table class="table-auto">
+    <div v-if="currencies.length === 0" class="text-center">
+      Loading...
+    </div>
+    <table v-else class="table-auto">
       <thead>
         <tr class="border-b-2 border-gray-300 dark:border-gray-700">
           <th class="font-medium">No</th>
@@ -12,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <CurrencyItem 
+        <CurrencyItem
           v-for="(currency, index) in currencies"
           v-bind="currency"
           v-bind:index="index"

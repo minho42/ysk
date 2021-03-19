@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center justify-center mx-6 pt-4">
-    <div class="font-semibold leading-8 mb-6">
+    <div class="font-semibold leading-8 mb-3">
       호주->한국 역송금 업체 환율 비교
     </div>
 
