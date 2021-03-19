@@ -47,13 +47,13 @@ export default {
   },
   async created() {
     // Ping heroku
-    // const res = await fetch('https://audkrw:8000.herokuapp.com')
-    // const { data } = await res.json()
-    // console.log(data)   
+    const res = await fetch('https://ysk.herokuapp.com')
+    const { data } = await res.json()
+    console.log(data)   
   },
   async mounted() {
-      // const res = await fetch('https://ysk.herokuapp.com/api/data')
-      const res = await fetch('http://localhost:8000/api/data')
+      const res = await fetch('https://ysk.herokuapp.com/data')
+      // const res = await fetch('http://localhost:8000/data')
       const data = await res.json()
       console.log(data)    
       this.currencies = data
