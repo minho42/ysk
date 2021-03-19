@@ -86,6 +86,8 @@ CORS_ORIGIN_WHITELIST = (
     "https://127.0.0.1:8080",
     "https://127.0.0.1:8000",
     "https://audkrw.netlify.app",
+    "https://www.audkrw.com",
+    "https://audkrw.com",
 )
 
 REST_FRAMEWORK = {
