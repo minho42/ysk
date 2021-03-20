@@ -188,6 +188,26 @@ def scrape_dondirect():
             return (0.0, 0.0, note)
 
 
+def scrape_instarem():
+    # Instarem
+    # Using XHR
+
+    url = f"https://www.instarem.com/api/v1/public/transaction/computed-value?source_currency=AUD&destination_currency=KRW&instarem_bank_account_id=135&source_amount={BASE_AMOUNT}"
+    s = requests.session()
+    r = s.get(url=url)
+    rr = json.loads(r.text)
+
+    try:
+        #
+        rate = rr["data"]["destination_amount"] / BASE_AMOUNT
+        fee = rr["data"]["transaction_fee_amount"]
+    except KeyError:
+        rate = 0
+        fee = 0
+
+    return (rate, fee)
+
+
 def scrape_remitly():
     # Remitly
     # Using XHR
@@ -216,8 +236,9 @@ def scrape_remitly():
         if fee:
             fee = re.findall(r"[\d,.]+", fee.strip())[0]
         # note = "프로모션 적용안함; 수수료 Express delivery 기준"
-        # return (rate, fee, note)
-        return (rate, fee)
+        note = "Without promotion"
+        return (rate, fee, note)
+        # return (rate, fee)
     else:
         return (0.0, 0.0)
     return (rate, fee)
@@ -450,6 +471,11 @@ def save_remitly():
 
 
 @timeit
+def save_instarem():
+    return save_currency("InstaReM", "https://www.instarem.com/en-au", scrape_instarem)
+
+
+@timeit
 def save_wontop():
     return save_currency("Wontop", "http://www.wontop.com.au", scrape_wontop)
 
@@ -516,6 +542,7 @@ def fetch_new_data():
     save_transferwise(),
     save_wirebarley(),
     save_remitly(),
+    save_instarem(),
     # Using selenium
     save_dondirect(),
     save_wontop(),
