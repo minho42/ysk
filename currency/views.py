@@ -365,7 +365,7 @@ def scrape_wise():
         "sourceCurrency": "AUD",
         "targetCurrency": "KRW",
     }
-    r = requests.post(url=url, headers=headers, data=json.dumps(data))
+    r = requests.post(url=url, headers=headers, data=json.dumps(data))  # without json.dumps() gets 400 error
     rr = json.loads(r.text)
 
     fee_data = {}
