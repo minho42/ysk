@@ -25,6 +25,9 @@ from .models import Currency
 from .serializers import CurrencySerializer
 
 BASE_AMOUNT = 1000
+USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+)
 
 
 class CurrencyHome(APIView):
@@ -265,7 +268,7 @@ def scrape_wirebarley():
         "iosVer": "9999",
         "lang": "en",
         "Referer": "https://www.wirebarley.com/",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+        "user-agent": USER_AGENT,
         "X-Requested-With": "XMLHttpRequest",
     }
     s = requests.session()
@@ -327,21 +330,94 @@ def scrape_wirebarley():
     return (rate, fee)
 
 
-def scrape_transferwise():
+def scrape_wise():
+    # Transferwise -> wise
     # Using XHR
-    url = f"https://transferwise.com/gateway/v3/comparisons?sendAmount={BASE_AMOUNT}&sourceCurrency=AUD&targetCurrency=KRW"
-    r = requests.get(url)
+    url = "https://wise.com/gateway/v3/quotes/"
+
+    headers = {
+        "authority": "wise.com",
+        "pragma": "no-cache",
+        "path": "/gateway/v3/quotes/",
+        "scheme": "https",
+        "accept": "application/json",
+        "accept-encoding": "gzip, deflate",
+        "accept-language": "en-GB",
+        "cache-control": "no-cache",
+        "content-type": "application/json",
+        "sec-ch-ua": '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
+        "origin": "https://wise.com",
+        "referer": "https://wise.com/au",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+        "time-zone": "+1100",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+        "x-access-token": "Tr4n5f3rw153",
+        # "referrerPolicy": "strict-origin-when-cross-origin",
+    }
+
+    data = {
+        "guaranteedTargetAmount": "false",
+        "preferredPayIn": "null",
+        "sourceAmount": "1000",
+        "sourceCurrency": "AUD",
+        "targetCurrency": "KRW",
+    }
+    r = requests.post(url=url, headers=headers, data=json.dumps(data))
     rr = json.loads(r.text)
-    real_rate = 0
+
+    fee_data = {}
+    for payment_option in rr["paymentOptions"]:
+        """
+        # 'payIn': rr['paymentOptions]['payIn'] options
+        OSKO
+        BANK_TRANSFER
+        POLI
+        DEBIT
+        CREDIT
+        MC_DEBIT_OR_PREPAID
+        INTERNATIONAL_DEBIT
+        MC_BUSINESS_CREDIT
+        MC_CREDIT
+        INTERNATIONAL_CREDIT
+        CARD
+        MAESTRO
+        MC_BUSINESS_DEBIT
+        VISA_BUSINESS_DEBIT
+        VISA_CREDIT
+        VISA_DEBIT_OR_PREPAID
+        VISA_BUSINESS_CREDIT
+        BALANCE
+        """
+        if payment_option["payIn"] == "BANK_TRANSFER":
+            fee_data = payment_option
     try:
-        for provider in rr["providers"]:
-            if provider["name"].strip() == "TransferWise":
-                rate = provider["quotes"][0]["rate"]
-                fee = provider["quotes"][0]["fee"]
+        rate = rr["rate"]
+        fee = fee_data["fee"]["total"]
     except KeyError:
         rate = 0
         fee = 0
+    print(rate, fee)
     return (rate, fee)
+
+
+# def scrape_transferwise():
+#     # Using XHR
+#     url = f"https://transferwise.com/gateway/v3/comparisons?sendAmount={BASE_AMOUNT}&sourceCurrency=AUD&targetCurrency=KRW"
+#     r = requests.get(url)
+#     rr = json.loads(r.text)
+#     real_rate = 0
+#     try:
+#         for provider in rr["providers"]:
+#             if provider["name"].strip() == "TransferWise":
+#                 rate = provider["quotes"][0]["rate"]
+#                 fee = provider["quotes"][0]["fee"]
+#     except KeyError:
+#         rate = 0
+#         fee = 0
+#     return (rate, fee)
 
 
 def get_timestamp():
@@ -381,9 +457,7 @@ def scrape_commbank():
 
 def scrape_currency(url, xpath, rate_regex="[\d,.]+"):
     s = requests.session()
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
-    }
+    headers = {"user-agent": USER_AGENT}
     r = s.get(url, headers=headers)
     node = html.fromstring(r.content)
     rate = node.xpath(xpath)
@@ -462,8 +536,8 @@ def save_currency(name: str, url: str, func: Callable) -> float:
 
 
 @timeit
-def save_transferwise():
-    return save_currency("TransferWise", "https://transferwise.com/au", scrape_transferwise)
+def save_wise():
+    return save_currency("Wise", "https://wise.com/au", scrape_wise)
 
 
 @timeit
@@ -545,7 +619,7 @@ def fetch_new_data():
     save_wiztoss(),
     # Using requests, XHR
     save_commbank(),
-    save_transferwise(),
+    save_wise(),
     save_wirebarley(),
     save_remitly(),
     save_instarem(),
