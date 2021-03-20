@@ -95,6 +95,8 @@ def scrape_gomtransfer():
                 (By.XPATH, "//label[@id='auau']"), "원"
             )  # This is much faster than "presence_of_element_located"
         )
+    except NoSuchElementException:
+        return (0.0, 0.0)
     finally:
         try:
             rate = driver.find_element_by_xpath("//td[@id='hohans']").text
@@ -124,6 +126,8 @@ def scrape_wontop():
 
     try:
         element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div/aside[@id='text-11']")))
+    except NoSuchElementException:
+        return (0.0, 0.0)
     finally:
         # <iframe class="resp-iframe" style="height: 210px;" src="http://wontop.com.au/wp-content/myfiles/au2kr9.php" frameborder="0"></iframe>
         iframe = driver.find_element_by_xpath("//iframe[@class='resp-iframe']")
@@ -159,6 +163,8 @@ def scrape_dondirect():
 
     try:
         element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "ng-binding")))
+    except NoSuchElementException:
+        return (0.0, 0.0)
     finally:
         try:
             rate = driver.find_element_by_xpath(
