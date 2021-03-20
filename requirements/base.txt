@@ -1,12 +1,8 @@
 celery
-crispy-tailwind
 Django
-django-allauth
 django-celery-beat
 django-cors-headers
-django-crispy-forms
 django-environ
-django-extensions
 djangorestframework
 gunicorn
 lxml
