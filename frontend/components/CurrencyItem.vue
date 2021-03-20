@@ -36,7 +36,7 @@
       </div>
     </td>
     <td class="">
-      <div v-if="note" class="inline-flex text-yellow-400 px-1">
+      <div v-if="note" class="inline-flex text-yellow-400 px-1 break-all">
         {{ note }}
       </div>
     </td>
