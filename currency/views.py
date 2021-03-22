@@ -340,7 +340,7 @@ def scrape_wise():
         "path": "/gateway/v3/quotes/",
         "scheme": "https",
         "accept": "application/json",
-        "accept-encoding": "gzip, deflate",
+        "accept-encoding": "gzip, deflate",  # <- adding 'br' breaks the result encoding
         "accept-language": "en-GB",
         "cache-control": "no-cache",
         "content-type": "application/json",
@@ -467,12 +467,77 @@ def scrape_currency(url, xpath, rate_regex="[\d,.]+"):
     return rate
 
 
-def scrape_naver():
+def scrape_naver_usd():
+    rate = scrape_currency(
+        "https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_USDKRW",
+        '//table[@class="tbl_calculator"]/tbody/tr/td[1]',
+    )
+    rate = rate.replace(",", "")
+    return rate
+
+
+def scrape_naver_aud():
     rate = scrape_currency(
         "https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_AUDKRW",
         '//table[@class="tbl_calculator"]/tbody/tr/td[1]',
     )
+    rate = rate.replace(",", "")
     fee = 0
+    return (rate, fee)
+
+
+def scrape_azimo():
+    # Azimo
+    # Using XHR
+
+    url = f"https://api.azimo.com/service-rates/v1/public/en/prices/current?sendingCountry=AUS&sendingCurrency=AUD&receivingCountry=KOR&receivingCurrency=USD&deliveryMethod=SWIFT"
+    headers = {
+        "authority": "api.azimo.com",
+        "method": "GET",
+        "path": "/service-rates/v1/public/en/prices/current?sendingCountry=AUS&sendingCurrency=AUD&receivingCountry=KOR&receivingCurrency=USD&deliveryMethod=SWIFT",
+        "scheme": "https",
+        "accept": "*/*",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-AU,en;q=0.9,ko-KR;q=0.8,ko;q=0.7,en-GB;q=0.6,en-US;q=0.5",
+        "cache-control": "no-cache",
+        "origin": "https://azimo.com",
+        "pragma": "no-cache",
+        "referer": "https://azimo.com/en/send-money-to-korea-republic-of",
+        "sec-ch-ua": '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": USER_AGENT,
+        "x-api-version": "3.27.0",
+        "x-app-version": "LEGO-CLIENT,4.49.48",
+        "x-application-calculator": "INDIVIDUAL",
+        "x-azimo-utdm": "10407fcc-1be8-4231-bf15-d3b2da5dd434",
+        "x-correlation-id": "LEGO-CLIENT-51e5fdfa-19ae-4c23-9d0f-6eeab29507d7",
+        "x-platform-version": "2021.12",
+    }
+    s = requests.session()
+    r = s.get(url=url, headers=headers)
+    rr = json.loads(r.text)
+
+    try:
+        fee = rr["rates"][0]["adjustments"]["fee"]["max"]["was"]
+        rate = rr["rates"][0]["adjustments"]["rate"]["value"]["was"]
+        # Convert USD -> KRW
+        usd_rate = scrape_naver_usd()
+        if usd_rate:
+            rate = float(rate) * float(usd_rate)
+        else:
+            print("Can't convert USD->KRW")
+            return (0, 0)
+    except (KeyError, IndexError):
+        rate = 0
+        fee = 0
+
+    if rate:
+        note = "Receive in USD"
+        return (rate, fee, note)
+
     return (rate, fee)
 
 
@@ -550,6 +615,11 @@ def save_remitly():
 
 
 @timeit
+def save_azimo():
+    return save_currency("Azimo", "https://azimo.com/en/send-money-to-korea-republic-of", scrape_azimo)
+
+
+@timeit
 def save_instarem():
     return save_currency("InstaReM", "https://www.instarem.com/en-au", scrape_instarem)
 
@@ -574,7 +644,7 @@ def save_naver():
     return save_currency(
         "Naver",
         "https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_AUDKRW",
-        scrape_naver,
+        scrape_naver_aud,
     )
 
 
@@ -612,7 +682,7 @@ def fetch_new_data():
     # deleting all makes modified useless as created_at shares same value...
     # Currency.objects.all().delete()
 
-    # Using requests
+    # Using requests with lxml/xpath
     save_naver(),
     save_stra(),
     save_wiztoss(),
@@ -622,6 +692,7 @@ def fetch_new_data():
     save_wirebarley(),
     save_remitly(),
     save_instarem(),
+    save_azimo(),
     # Using selenium
     save_dondirect(),
     save_wontop(),
