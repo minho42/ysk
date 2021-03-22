@@ -50,11 +50,17 @@ export default {
       const res = await fetch('https://ysk.herokuapp.com/data')
       // const res = await fetch('http://localhost:8000/data')
       const data = await res.json()
-      console.log(data)    
+      // console.log(data)    
       this.currencies = data
       
       if (data && data.length > 0) {
-        const lastUpdate = data[0].modified
+        const dataSortedByModified = [...data].sort((a, b) => 
+        {
+          if (new Date(a.modified) > new Date(b.modified)) return -1
+          if (new Date(a.modified) < new Date(b.modified)) return 1
+        })
+        
+        const lastUpdate = dataSortedByModified[0].modified
         if (lastUpdate) {
           this.lastUpdate = formatDistance(new Date(lastUpdate), new Date()) + ' ago'
         }
@@ -65,7 +71,7 @@ export default {
     // Ping heroku
     const res = await fetch('https://ysk.herokuapp.com')
     const { data } = await res.json()
-    console.log(data)   
+    // console.log(data)   
   },
   async mounted() {
     this.fetch()
