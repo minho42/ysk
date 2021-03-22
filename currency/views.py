@@ -245,9 +245,8 @@ def scrape_remitly():
         if fee:
             fee = re.findall(r"[\d,.]+", fee.strip())[0]
         # note = "프로모션 적용안함; 수수료 Express delivery 기준"
-        note = "Without promotion"
-        return (rate, fee, note)
-        # return (rate, fee)
+        # return (rate, fee, note)
+        return (rate, fee)
     else:
         return (0.0, 0.0)
     return (rate, fee)
