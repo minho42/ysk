@@ -522,11 +522,11 @@ def scrape_azimo():
 
     try:
         fee = rr["rates"][0]["adjustments"]["fee"]["max"]["was"]
-        rate = rr["rates"][0]["adjustments"]["rate"]["value"]["was"]
+        rate_in_usd = rate = rr["rates"][0]["adjustments"]["rate"]["value"]["was"]
         # Convert USD -> KRW
-        usd_rate = scrape_naver_usd()
-        if usd_rate:
-            rate = float(rate) * float(usd_rate)
+        usd_krw_rate = scrape_naver_usd()
+        if usd_krw_rate:
+            rate = float(rate_in_usd) * float(usd_krw_rate)
         else:
             print("Can't convert USD->KRW")
             return (0, 0)
@@ -535,7 +535,9 @@ def scrape_azimo():
         fee = 0
 
     if rate:
-        note = "Receive in USD"
+        # note = "Receive in USD"
+        note = f"USD->KRW: {rate_in_usd} x {usd_krw_rate} = {round_it(rate)}"
+
         return (rate, fee, note)
 
     return (rate, fee)
