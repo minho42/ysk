@@ -486,6 +486,58 @@ def scrape_naver_aud():
     return (rate, fee)
 
 
+def scrape_ria():
+    pass
+    """
+curl 'https://riamoneytransfer.com/api/MoneyTransferCalculator/Calculate' \
+  -H 'Connection: keep-alive' \
+  -H 'Pragma: no-cache' \
+  -H 'Cache-Control: no-cache' \
+  -H 'sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"' \
+  -H 'CultureCode: en-AU' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzZTFjN2M2Zi01ZTU4LTRmMTAtOTQxYy0xNGQ3YTViMDc3ZWEiLCJpYXQiOjE2MTY1MDcyMTgsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIxNDEuMTY4LjE3OC4yMzIiLCJybXRFbWFpbCI6IjE0MS4xNjguMTc4LjIzMiIsInNlc3Npb25DYWNoZUtleSI6ImMzMzY0NTA2LTA0MjYtNDE5Zi04N2Q4LWY1OTljNjdjMmVlNSIsImlwSXNvQ29kZSI6IkFVIiwiY2xpZW50SXBBZGRyZXNzIjoiMTQxLjE2OC4xNzguMjMyIiwiY2xpZW50VHlwZSI6IldlYiIsImlzb0NvZGUiOiJBVSIsInNlc3Npb25DdWx0dXJlQ29kZSI6ImVuLUFVIiwiY3VsdHVyZUNvZGUiOiJlbi1BVSIsIlNlc3Npb25JZCI6IjEzOTM5OTUwMDQiLCJuYmYiOjE2MTY1MDcyMTgsImV4cCI6MTYxNjUwODQxOCwiaXNzIjoiQXV0aFNlcnZlciIsImFwaVRva2VuIjoiZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnBjM01pT2lKelpYTnphVzl1SUdsemMzVmxjaUlzSW1GMVpDSTZJbWgwZEhBNkx5OXpaWE56YVc5dUxuUjBJaXdpYm1KbUlqb3hOakUyTlRBM01qRTRMQ0psZUhBaU9qRTJNVFkxTVRBNE1UZ3NJbXAwYVNJNkltTmpNVFF4WlRJeExUUmxZbVF0TkRjM1pDMDVaVFJoTFdZMU0yTm1ZMlZqTTJOak5TSXNJbWxoZENJNklqRTJNVFkxTURjd01qY2lMQ0pEYkdsbGJuUlVlWEJsSWpvaVYyVmlJaXdpVTJWeWRtVnlTWEJCWkdSeVpYTnpJam9pTVRReExqRTJPQzR4TnpndU1qTXlMQ0F4TUM0ek1TNDRNQzR4TXpnaUxDSkRiR2xsYm5SSmNFRmtaSEpsYzNNaU9pSXhOREV1TVRZNExqRTNPQzR5TXpJaUxDSm9kSFJ3T2k4dlEzVnpkRzl0WlhKVFpYSjJhV05sVkc5dmJHdHBkQzV5YVdGbGJuWnBZUzV1WlhRdmFXUmxiblJwZEhrdlkyeGhhVzF6TDFObGMzTnBiMjVKUkNJNklqRXpPVE01T1RVd01EUWlMQ0oxYm1seGRXVmZibUZ0WlNJNklrRjFRWEJwSWl3aVlYVjBhRjkwYVcxbElqb2lNeTh5TXk4eU1ESXhJREU2TkRNNk5EWWdVRTBpTENKaGRYUm9iV1YwYUc5a0lqb2lhSFIwY0RvdkwzTmphR1Z0WVhNdWJXbGpjbTl6YjJaMExtTnZiUzkzY3k4eU1EQTRMekEyTDJsa1pXNTBhWFI1TDJGMWRHaGxiblJwWTJGMGFXOXViV1YwYUc5a0wzQmhjM04zYjNKa0lpd2lRV2RsYm5SQmNHbFZjMlZ5Ym1GdFpTSTZJa0YxUVhCcElpd2lVbVZqWldsMmFXNW5RV2RsYm5SSlpDSTZJalF6T0RFMU9ERXhJaXdpUVd4c2IzZEZiV0ZwYkZObGJtUnBibWNpT2lKMGNuVmxJaXdpUVd4c2IzZEpjRUZrWkhKbGMzTlZibUpzYjJOcmFXNW5Jam9pZEhKMVpTSXNJa0ZzYkc5M1QzSmtaWEpNYjI5cmRYQnpJam9pZEhKMVpTSjkubWZyYzFxMU4zWmN5NHd1SE5Uel84SE1lOW4yLTNKWFhUN05sTFRuR25BayIsImF1ZCI6IlJNVFdlYiJ9.a5OcCECKuMHwLn4guhgWMrIdx53pFX8U-NMegqQaQKM' \
+  -H 'Current-Page: https://riamoneytransfer.com/au/en' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36' \
+  -H 'IsoCode: AU' \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  -H 'Origin: https://riamoneytransfer.com' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Referer: https://riamoneytransfer.com/au/en' \
+  -H 'Accept-Language: en-AU,en;q=0.9,ko-KR;q=0.8,ko;q=0.7,en-GB;q=0.6,en-US;q=0.5' \
+  -H 'Cookie: TS013e9518=015d3c15350d823ca19ecb935216e8f4bd0a2870a3e19b22a0ac725baab1ce06400453bce22fb88102b1a2da52f845b1b52ecbd088; TS013e9518030=0123d1b1a707e030ee3286658288043c7539d9023fa9384c414e7a06d65a4c21f679513ce025a88dcb6574a7c5c71df89fed34c89a; TSb08f6b3d027=08870df200ab2000cb2f9affdda6dfb6c388198fe2026cdd416385ba745b08f30eedb066f22541770862ddf77211300021bcc1a07a113d40433ecc2bb0e349360ff545e163811565b4f0752c71b4f8a55673716462ea1ee5485e1e7c1f82d1a6; TOKEN=%7B%22jwtToken%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzZTFjN2M2Zi01ZTU4LTRmMTAtOTQxYy0xNGQ3YTViMDc3ZWEiLCJpYXQiOjE2MTY1MDcyMTgsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIxNDEuMTY4LjE3OC4yMzIiLCJybXRFbWFpbCI6IjE0MS4xNjguMTc4LjIzMiIsInNlc3Npb25DYWNoZUtleSI6ImMzMzY0NTA2LTA0MjYtNDE5Zi04N2Q4LWY1OTljNjdjMmVlNSIsImlwSXNvQ29kZSI6IkFVIiwiY2xpZW50SXBBZGRyZXNzIjoiMTQxLjE2OC4xNzguMjMyIiwiY2xpZW50VHlwZSI6IldlYiIsImlzb0NvZGUiOiJBVSIsInNlc3Npb25DdWx0dXJlQ29kZSI6ImVuLUFVIiwiY3VsdHVyZUNvZGUiOiJlbi1BVSIsIlNlc3Npb25JZCI6IjEzOTM5OTUwMDQiLCJuYmYiOjE2MTY1MDcyMTgsImV4cCI6MTYxNjUwODQxOCwiaXNzIjoiQXV0aFNlcnZlciIsImFwaVRva2VuIjoiZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnBjM01pT2lKelpYTnphVzl1SUdsemMzVmxjaUlzSW1GMVpDSTZJbWgwZEhBNkx5OXpaWE56YVc5dUxuUjBJaXdpYm1KbUlqb3hOakUyTlRBM01qRTRMQ0psZUhBaU9qRTJNVFkxTVRBNE1UZ3NJbXAwYVNJNkltTmpNVFF4WlRJeExUUmxZbVF0TkRjM1pDMDVaVFJoTFdZMU0yTm1ZMlZqTTJOak5TSXNJbWxoZENJNklqRTJNVFkxTURjd01qY2lMQ0pEYkdsbGJuUlVlWEJsSWpvaVYyVmlJaXdpVTJWeWRtVnlTWEJCWkdSeVpYTnpJam9pTVRReExqRTJPQzR4TnpndU1qTXlMQ0F4TUM0ek1TNDRNQzR4TXpnaUxDSkRiR2xsYm5SSmNFRmtaSEpsYzNNaU9pSXhOREV1TVRZNExqRTNPQzR5TXpJaUxDSm9kSFJ3T2k4dlEzVnpkRzl0WlhKVFpYSjJhV05sVkc5dmJHdHBkQzV5YVdGbGJuWnBZUzV1WlhRdmFXUmxiblJwZEhrdlkyeGhhVzF6TDFObGMzTnBiMjVKUkNJNklqRXpPVE01T1RVd01EUWlMQ0oxYm1seGRXVmZibUZ0WlNJNklrRjFRWEJwSWl3aVlYVjBhRjkwYVcxbElqb2lNeTh5TXk4eU1ESXhJREU2TkRNNk5EWWdVRTBpTENKaGRYUm9iV1YwYUc5a0lqb2lhSFIwY0RvdkwzTmphR1Z0WVhNdWJXbGpjbTl6YjJaMExtTnZiUzkzY3k4eU1EQTRMekEyTDJsa1pXNTBhWFI1TDJGMWRHaGxiblJwWTJGMGFXOXViV1YwYUc5a0wzQmhjM04zYjNKa0lpd2lRV2RsYm5SQmNHbFZjMlZ5Ym1GdFpTSTZJa0YxUVhCcElpd2lVbVZqWldsMmFXNW5RV2RsYm5SSlpDSTZJalF6T0RFMU9ERXhJaXdpUVd4c2IzZEZiV0ZwYkZObGJtUnBibWNpT2lKMGNuVmxJaXdpUVd4c2IzZEpjRUZrWkhKbGMzTlZibUpzYjJOcmFXNW5Jam9pZEhKMVpTSXNJa0ZzYkc5M1QzSmtaWEpNYjI5cmRYQnpJam9pZEhKMVpTSjkubWZyYzFxMU4zWmN5NHd1SE5Uel84SE1lOW4yLTNKWFhUN05sTFRuR25BayIsImF1ZCI6IlJNVFdlYiJ9.a5OcCECKuMHwLn4guhgWMrIdx53pFX8U-NMegqQaQKM%22%2C%22expiresInSeconds%22%3A1200%2C%22issuedAt%22%3A%221616507027%22%2C%22tokenType%22%3A%22bearer%22%7D' \
+  --data-raw '{"Selections":{"countryTo":"KR","stateTo":null,"currencyTo":null,"currencyFrom":"AUD","paymentMethod":null,"deliveryMethod":null,"amountFrom":1000,"amountTo":null,"agentToId":null,"agentToLocationId":null,"promoCode":null,"promoId":0,"transferReason":null,"shouldCalcAmountFrom":false}}' \
+  --compressed
+    """
+
+
+def scrape_orbitremit():
+    pass
+    """
+curl 'https://www.orbitremit.com/api/rates' \
+  -H 'authority: www.orbitremit.com' \
+  -H 'pragma: no-cache' \
+  -H 'cache-control: no-cache' \
+  -H 'sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36' \
+  -H 'content-type: application/json' \
+  -H 'accept: */*' \
+  -H 'origin: https://www.orbitremit.com' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'referer: https://www.orbitremit.com/?keyword=orbit%20remit&matchtype=e&device=m&devicemodel=&placement=&creative=337323736282&network=g&campaignid=1729107244&adgroupid=67601175357&feeditemid=&targetid=kwd-38866474671&loc_physical_ms=9071758&loc_interest_ms=&adposition=&_gcamp=Brand&gclid=Cj0KCQjwutaCBhDfARIsAJHWnHsQo1T4IDtf-6CQ2bdMkkXgAKfGjIlobJnpMR9rAxiKw8RSfGrOHkwaAqcSEALw_wcB' \
+  -H 'accept-language: en-AU,en;q=0.9,ko-KR;q=0.8,ko;q=0.7,en-GB;q=0.6,en-US;q=0.5' \
+  -H 'cookie: __cfduid=d91dc221200fee64cc6ef8b8553f0bd561616507020; sendCurrency=AUD; track=%5B%7B%22Params%22:%7B%22keyword%22:%22orbit%2520remit%22,%22matchtype%22:%22e%22,%22device%22:%22m%22,%22creative%22:%22337323736282%22,%22network%22:%22g%22,%22campaignid%22:%221729107244%22,%22adgroupid%22:%2267601175357%22,%22targetid%22:%22kwd-38866474671%22,%22loc_physical_ms%22:%229071758%22,%22_gcamp%22:%22Brand%22,%22gclid%22:%22Cj0KCQjwutaCBhDfARIsAJHWnHsQo1T4IDtf-6CQ2bdMkkXgAKfGjIlobJnpMR9rAxiKw8RSfGrOHkwaAqcSEALw_wcB%22%7D,%22Time%22:1616507022101%7D%5D' \
+  --data-raw '{"send":"AUD","payout":"KRW","focus":"send","amount":"1000.00"}' \
+  --compressed
+    """
+
+
 def scrape_azimo():
     # Azimo
     # Using XHR
