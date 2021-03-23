@@ -11,7 +11,7 @@
           <th class="font-medium">Real rate</th>
           <th class="font-medium">Rate</th>
           <th class="font-medium">Fee</th>
-          <th class="font-medium">*</th>
+          <th class="hidden sm:block font-medium">Note</th>
         </tr>
       </thead>
       <tbody>

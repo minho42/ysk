@@ -35,7 +35,7 @@
         -
       </div>
     </td>
-    <td class="">
+    <td class="hidden sm:block">
       <div v-if="note" class="inline-flex text-yellow-400 px-1 break-all">
         {{ note }}
       </div>
