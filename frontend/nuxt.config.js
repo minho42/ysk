@@ -18,7 +18,7 @@ export default {
         hid: "description",
         name: "description",
         content:
-          "호주 역송금 wiztoss 위즈토스 돈다이렉트 환율 어플 비교 사이트 추천 환전 방법"
+          "호주 역송금 한국 송금 wiztoss 위즈토스 돈다이렉트 환율 어플 비교 사이트 추천 환전 방법"
       }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }]
