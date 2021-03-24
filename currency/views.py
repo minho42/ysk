@@ -1,20 +1,15 @@
 import json
 import re
-import types
 from datetime import datetime
-from typing import Callable, Tuple, Union
-from django.views import generic
+from typing import Callable
 
 import requests
 from core.utils import get_chromedriver, timeit
-from django.http import JsonResponse
 from django.utils import timezone
-from django.utils.timesince import timesince
-from django.views.generic import ListView
 from lxml import html
 from rest_framework import generics
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
