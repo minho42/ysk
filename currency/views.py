@@ -352,14 +352,16 @@ def scrape_wise():
         # "referrerPolicy": "strict-origin-when-cross-origin",
     }
 
-    data = {
-        "guaranteedTargetAmount": "false",
-        "preferredPayIn": "null",
-        "sourceAmount": "1000",
-        "sourceCurrency": "AUD",
-        "targetCurrency": "KRW",
-    }
-    r = requests.post(url=url, headers=headers, data=json.dumps(data))  # without json.dumps() gets 400 error
+    data = json.dumps(
+        {
+            "guaranteedTargetAmount": "false",
+            "preferredPayIn": "null",
+            "sourceAmount": BASE_AMOUNT,
+            "sourceCurrency": "AUD",
+            "targetCurrency": "KRW",
+        }
+    )
+    r = requests.post(url=url, headers=headers, data=data)  # without json.dumps() gets 400 error
     rr = json.loads(r.text)
 
     fee_data = {}
@@ -393,7 +395,6 @@ def scrape_wise():
     except KeyError:
         rate = 0
         fee = 0
-    print(rate, fee)
     return (rate, fee)
 
 
@@ -510,27 +511,47 @@ curl 'https://riamoneytransfer.com/api/MoneyTransferCalculator/Calculate' \
 
 
 def scrape_orbitremit():
-    pass
-    """
-curl 'https://www.orbitremit.com/api/rates' \
-  -H 'authority: www.orbitremit.com' \
-  -H 'pragma: no-cache' \
-  -H 'cache-control: no-cache' \
-  -H 'sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"' \
-  -H 'sec-ch-ua-mobile: ?0' \
-  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36' \
-  -H 'content-type: application/json' \
-  -H 'accept: */*' \
-  -H 'origin: https://www.orbitremit.com' \
-  -H 'sec-fetch-site: same-origin' \
-  -H 'sec-fetch-mode: cors' \
-  -H 'sec-fetch-dest: empty' \
-  -H 'referer: https://www.orbitremit.com/?keyword=orbit%20remit&matchtype=e&device=m&devicemodel=&placement=&creative=337323736282&network=g&campaignid=1729107244&adgroupid=67601175357&feeditemid=&targetid=kwd-38866474671&loc_physical_ms=9071758&loc_interest_ms=&adposition=&_gcamp=Brand&gclid=Cj0KCQjwutaCBhDfARIsAJHWnHsQo1T4IDtf-6CQ2bdMkkXgAKfGjIlobJnpMR9rAxiKw8RSfGrOHkwaAqcSEALw_wcB' \
-  -H 'accept-language: en-AU,en;q=0.9,ko-KR;q=0.8,ko;q=0.7,en-GB;q=0.6,en-US;q=0.5' \
-  -H 'cookie: __cfduid=d91dc221200fee64cc6ef8b8553f0bd561616507020; sendCurrency=AUD; track=%5B%7B%22Params%22:%7B%22keyword%22:%22orbit%2520remit%22,%22matchtype%22:%22e%22,%22device%22:%22m%22,%22creative%22:%22337323736282%22,%22network%22:%22g%22,%22campaignid%22:%221729107244%22,%22adgroupid%22:%2267601175357%22,%22targetid%22:%22kwd-38866474671%22,%22loc_physical_ms%22:%229071758%22,%22_gcamp%22:%22Brand%22,%22gclid%22:%22Cj0KCQjwutaCBhDfARIsAJHWnHsQo1T4IDtf-6CQ2bdMkkXgAKfGjIlobJnpMR9rAxiKw8RSfGrOHkwaAqcSEALw_wcB%22%7D,%22Time%22:1616507022101%7D%5D' \
-  --data-raw '{"send":"AUD","payout":"KRW","focus":"send","amount":"1000.00"}' \
-  --compressed
-    """
+    url = "https://www.orbitremit.com/api/rates"
+    headers = {
+        "authority": "www.orbitremit.com",
+        "method": "POST",
+        "path": "/api/rates",
+        "scheme": "https",
+        "accept": "*/*",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-AU,en;q=0.9,ko-KR;q=0.8,ko;q=0.7,en-GB;q=0.6,en-US;q=0.5",
+        "cache-control": "no-cache",
+        "content-type": "application/json",
+        # TODO: cookies are static for now -> check if cookies change or are set dynamically
+        "cookie": "__cfduid=d91dc221200fee64cc6ef8b8553f0bd561616507020; sendCurrency=AUD; track=%5B%7B%22Params%22:%7B%22keyword%22:%22orbit%2520remit%22,%22matchtype%22:%22e%22,%22device%22:%22m%22,%22creative%22:%22337323736282%22,%22network%22:%22g%22,%22campaignid%22:%221729107244%22,%22adgroupid%22:%2267601175357%22,%22targetid%22:%22kwd-38866474671%22,%22loc_physical_ms%22:%229071758%22,%22_gcamp%22:%22Brand%22,%22gclid%22:%22Cj0KCQjwutaCBhDfARIsAJHWnHsQo1T4IDtf-6CQ2bdMkkXgAKfGjIlobJnpMR9rAxiKw8RSfGrOHkwaAqcSEALw_wcB%22%7D,%22Time%22:1616507022101%7D%5D",
+        "origin": "https://www.orbitremit.com",
+        "pragma": "no-cache",
+        "referer": "https://www.orbitremit.com/",
+        "sec-ch-ua": '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+    }
+    data = json.dumps({"amount": "%.2f" % BASE_AMOUNT, "focus": "send", "payout": "KRW", "send": "AUD"})
+    s = requests.session()
+    r = s.post(url=url, headers=headers, data=data)
+    rr = json.loads(r.text)
+
+    try:
+        rate = rr["data"]["attributes"]["rate"]
+
+        fee_url = f"https://www.orbitremit.com/api/fees?send=AUD&payout=KRW&amount={'%.2f' % BASE_AMOUNT}"
+        r_fee = s.get(fee_url)
+        rr_fee = json.loads(r_fee.text)
+        fee = rr_fee["fee"] or 0  # It returns 'None' instead of 0 when there is no fee
+
+    except (KeyError, IndexError):
+        rate = 0
+        fee = 0
+
+    return (rate, fee)
 
 
 def scrape_azimo():
@@ -669,6 +690,11 @@ def save_azimo():
 
 
 @timeit
+def save_orbitremit():
+    return save_currency("OrbitRemit", "https://www.orbitremit.com", scrape_orbitremit)
+
+
+@timeit
 def save_instarem():
     return save_currency("InstaReM", "https://www.instarem.com/en-au", scrape_instarem)
 
@@ -731,18 +757,19 @@ def fetch_new_data():
     # deleting all makes modified useless as created_at shares same value...
     # Currency.objects.all().delete()
 
-    # Using requests with lxml/xpath
-    save_naver(),
-    save_stra(),
-    save_wiztoss(),
-    # Using requests, XHR
-    save_commbank(),
-    save_wise(),
-    save_wirebarley(),
-    save_remitly(),
-    save_instarem(),
-    save_azimo(),
-    # Using selenium
-    save_dondirect(),
-    save_wontop(),
-    save_gomtransfer(),
+    # # Using requests with lxml/xpath
+    # save_naver(),
+    # save_stra(),
+    # save_wiztoss(),
+    # # Using requests, XHR
+    # save_commbank(),
+    # save_wise(),
+    # save_wirebarley(),
+    # save_remitly(),
+    # save_instarem(),
+    # save_azimo(),
+    save_orbitremit(),
+    # # Using selenium
+    # save_dondirect(),
+    # save_wontop(),
+    # save_gomtransfer(),
