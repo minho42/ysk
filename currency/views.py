@@ -435,7 +435,7 @@ def scrape_commbank():
                 rate = currency["bsImt"]
                 break
     except KeyError:
-        pass
+        rate = 0
 
     fee = 0
     fee_url = "https://www.commbank.com.au/personal/international/international-money-transfer.html"
@@ -484,30 +484,6 @@ def scrape_naver_aud():
 
 def scrape_ria():
     pass
-    """
-curl 'https://riamoneytransfer.com/api/MoneyTransferCalculator/Calculate' \
-  -H 'Connection: keep-alive' \
-  -H 'Pragma: no-cache' \
-  -H 'Cache-Control: no-cache' \
-  -H 'sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"' \
-  -H 'CultureCode: en-AU' \
-  -H 'sec-ch-ua-mobile: ?0' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzZTFjN2M2Zi01ZTU4LTRmMTAtOTQxYy0xNGQ3YTViMDc3ZWEiLCJpYXQiOjE2MTY1MDcyMTgsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIxNDEuMTY4LjE3OC4yMzIiLCJybXRFbWFpbCI6IjE0MS4xNjguMTc4LjIzMiIsInNlc3Npb25DYWNoZUtleSI6ImMzMzY0NTA2LTA0MjYtNDE5Zi04N2Q4LWY1OTljNjdjMmVlNSIsImlwSXNvQ29kZSI6IkFVIiwiY2xpZW50SXBBZGRyZXNzIjoiMTQxLjE2OC4xNzguMjMyIiwiY2xpZW50VHlwZSI6IldlYiIsImlzb0NvZGUiOiJBVSIsInNlc3Npb25DdWx0dXJlQ29kZSI6ImVuLUFVIiwiY3VsdHVyZUNvZGUiOiJlbi1BVSIsIlNlc3Npb25JZCI6IjEzOTM5OTUwMDQiLCJuYmYiOjE2MTY1MDcyMTgsImV4cCI6MTYxNjUwODQxOCwiaXNzIjoiQXV0aFNlcnZlciIsImFwaVRva2VuIjoiZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnBjM01pT2lKelpYTnphVzl1SUdsemMzVmxjaUlzSW1GMVpDSTZJbWgwZEhBNkx5OXpaWE56YVc5dUxuUjBJaXdpYm1KbUlqb3hOakUyTlRBM01qRTRMQ0psZUhBaU9qRTJNVFkxTVRBNE1UZ3NJbXAwYVNJNkltTmpNVFF4WlRJeExUUmxZbVF0TkRjM1pDMDVaVFJoTFdZMU0yTm1ZMlZqTTJOak5TSXNJbWxoZENJNklqRTJNVFkxTURjd01qY2lMQ0pEYkdsbGJuUlVlWEJsSWpvaVYyVmlJaXdpVTJWeWRtVnlTWEJCWkdSeVpYTnpJam9pTVRReExqRTJPQzR4TnpndU1qTXlMQ0F4TUM0ek1TNDRNQzR4TXpnaUxDSkRiR2xsYm5SSmNFRmtaSEpsYzNNaU9pSXhOREV1TVRZNExqRTNPQzR5TXpJaUxDSm9kSFJ3T2k4dlEzVnpkRzl0WlhKVFpYSjJhV05sVkc5dmJHdHBkQzV5YVdGbGJuWnBZUzV1WlhRdmFXUmxiblJwZEhrdlkyeGhhVzF6TDFObGMzTnBiMjVKUkNJNklqRXpPVE01T1RVd01EUWlMQ0oxYm1seGRXVmZibUZ0WlNJNklrRjFRWEJwSWl3aVlYVjBhRjkwYVcxbElqb2lNeTh5TXk4eU1ESXhJREU2TkRNNk5EWWdVRTBpTENKaGRYUm9iV1YwYUc5a0lqb2lhSFIwY0RvdkwzTmphR1Z0WVhNdWJXbGpjbTl6YjJaMExtTnZiUzkzY3k4eU1EQTRMekEyTDJsa1pXNTBhWFI1TDJGMWRHaGxiblJwWTJGMGFXOXViV1YwYUc5a0wzQmhjM04zYjNKa0lpd2lRV2RsYm5SQmNHbFZjMlZ5Ym1GdFpTSTZJa0YxUVhCcElpd2lVbVZqWldsMmFXNW5RV2RsYm5SSlpDSTZJalF6T0RFMU9ERXhJaXdpUVd4c2IzZEZiV0ZwYkZObGJtUnBibWNpT2lKMGNuVmxJaXdpUVd4c2IzZEpjRUZrWkhKbGMzTlZibUpzYjJOcmFXNW5Jam9pZEhKMVpTSXNJa0ZzYkc5M1QzSmtaWEpNYjI5cmRYQnpJam9pZEhKMVpTSjkubWZyYzFxMU4zWmN5NHd1SE5Uel84SE1lOW4yLTNKWFhUN05sTFRuR25BayIsImF1ZCI6IlJNVFdlYiJ9.a5OcCECKuMHwLn4guhgWMrIdx53pFX8U-NMegqQaQKM' \
-  -H 'Current-Page: https://riamoneytransfer.com/au/en' \
-  -H 'Accept: application/json, text/plain, */*' \
-  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36' \
-  -H 'IsoCode: AU' \
-  -H 'Content-Type: application/json;charset=UTF-8' \
-  -H 'Origin: https://riamoneytransfer.com' \
-  -H 'Sec-Fetch-Site: same-origin' \
-  -H 'Sec-Fetch-Mode: cors' \
-  -H 'Sec-Fetch-Dest: empty' \
-  -H 'Referer: https://riamoneytransfer.com/au/en' \
-  -H 'Accept-Language: en-AU,en;q=0.9,ko-KR;q=0.8,ko;q=0.7,en-GB;q=0.6,en-US;q=0.5' \
-  -H 'Cookie: TS013e9518=015d3c15350d823ca19ecb935216e8f4bd0a2870a3e19b22a0ac725baab1ce06400453bce22fb88102b1a2da52f845b1b52ecbd088; TS013e9518030=0123d1b1a707e030ee3286658288043c7539d9023fa9384c414e7a06d65a4c21f679513ce025a88dcb6574a7c5c71df89fed34c89a; TSb08f6b3d027=08870df200ab2000cb2f9affdda6dfb6c388198fe2026cdd416385ba745b08f30eedb066f22541770862ddf77211300021bcc1a07a113d40433ecc2bb0e349360ff545e163811565b4f0752c71b4f8a55673716462ea1ee5485e1e7c1f82d1a6; TOKEN=%7B%22jwtToken%22%3A%22eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzZTFjN2M2Zi01ZTU4LTRmMTAtOTQxYy0xNGQ3YTViMDc3ZWEiLCJpYXQiOjE2MTY1MDcyMTgsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiIxNDEuMTY4LjE3OC4yMzIiLCJybXRFbWFpbCI6IjE0MS4xNjguMTc4LjIzMiIsInNlc3Npb25DYWNoZUtleSI6ImMzMzY0NTA2LTA0MjYtNDE5Zi04N2Q4LWY1OTljNjdjMmVlNSIsImlwSXNvQ29kZSI6IkFVIiwiY2xpZW50SXBBZGRyZXNzIjoiMTQxLjE2OC4xNzguMjMyIiwiY2xpZW50VHlwZSI6IldlYiIsImlzb0NvZGUiOiJBVSIsInNlc3Npb25DdWx0dXJlQ29kZSI6ImVuLUFVIiwiY3VsdHVyZUNvZGUiOiJlbi1BVSIsIlNlc3Npb25JZCI6IjEzOTM5OTUwMDQiLCJuYmYiOjE2MTY1MDcyMTgsImV4cCI6MTYxNjUwODQxOCwiaXNzIjoiQXV0aFNlcnZlciIsImFwaVRva2VuIjoiZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnBjM01pT2lKelpYTnphVzl1SUdsemMzVmxjaUlzSW1GMVpDSTZJbWgwZEhBNkx5OXpaWE56YVc5dUxuUjBJaXdpYm1KbUlqb3hOakUyTlRBM01qRTRMQ0psZUhBaU9qRTJNVFkxTVRBNE1UZ3NJbXAwYVNJNkltTmpNVFF4WlRJeExUUmxZbVF0TkRjM1pDMDVaVFJoTFdZMU0yTm1ZMlZqTTJOak5TSXNJbWxoZENJNklqRTJNVFkxTURjd01qY2lMQ0pEYkdsbGJuUlVlWEJsSWpvaVYyVmlJaXdpVTJWeWRtVnlTWEJCWkdSeVpYTnpJam9pTVRReExqRTJPQzR4TnpndU1qTXlMQ0F4TUM0ek1TNDRNQzR4TXpnaUxDSkRiR2xsYm5SSmNFRmtaSEpsYzNNaU9pSXhOREV1TVRZNExqRTNPQzR5TXpJaUxDSm9kSFJ3T2k4dlEzVnpkRzl0WlhKVFpYSjJhV05sVkc5dmJHdHBkQzV5YVdGbGJuWnBZUzV1WlhRdmFXUmxiblJwZEhrdlkyeGhhVzF6TDFObGMzTnBiMjVKUkNJNklqRXpPVE01T1RVd01EUWlMQ0oxYm1seGRXVmZibUZ0WlNJNklrRjFRWEJwSWl3aVlYVjBhRjkwYVcxbElqb2lNeTh5TXk4eU1ESXhJREU2TkRNNk5EWWdVRTBpTENKaGRYUm9iV1YwYUc5a0lqb2lhSFIwY0RvdkwzTmphR1Z0WVhNdWJXbGpjbTl6YjJaMExtTnZiUzkzY3k4eU1EQTRMekEyTDJsa1pXNTBhWFI1TDJGMWRHaGxiblJwWTJGMGFXOXViV1YwYUc5a0wzQmhjM04zYjNKa0lpd2lRV2RsYm5SQmNHbFZjMlZ5Ym1GdFpTSTZJa0YxUVhCcElpd2lVbVZqWldsMmFXNW5RV2RsYm5SSlpDSTZJalF6T0RFMU9ERXhJaXdpUVd4c2IzZEZiV0ZwYkZObGJtUnBibWNpT2lKMGNuVmxJaXdpUVd4c2IzZEpjRUZrWkhKbGMzTlZibUpzYjJOcmFXNW5Jam9pZEhKMVpTSXNJa0ZzYkc5M1QzSmtaWEpNYjI5cmRYQnpJam9pZEhKMVpTSjkubWZyYzFxMU4zWmN5NHd1SE5Uel84SE1lOW4yLTNKWFhUN05sTFRuR25BayIsImF1ZCI6IlJNVFdlYiJ9.a5OcCECKuMHwLn4guhgWMrIdx53pFX8U-NMegqQaQKM%22%2C%22expiresInSeconds%22%3A1200%2C%22issuedAt%22%3A%221616507027%22%2C%22tokenType%22%3A%22bearer%22%7D' \
-  --data-raw '{"Selections":{"countryTo":"KR","stateTo":null,"currencyTo":null,"currencyFrom":"AUD","paymentMethod":null,"deliveryMethod":null,"amountFrom":1000,"amountTo":null,"agentToId":null,"agentToLocationId":null,"promoCode":null,"promoId":0,"transferReason":null,"shouldCalcAmountFrom":false}}' \
-  --compressed
-    """
 
 
 def scrape_orbitremit():
@@ -741,35 +717,25 @@ def save_commbank():
 def save_stra():
     return save_currency("Stra", "http://1472.com.au", scrape_stra)
 
-    # @timeit
-    # def get_all():
-    """
-    No need to use "fetch_new_data" anymore since ditched chart/vue part
-    Count how many companies are to be fetched
-    Only save if the result count matches
-    Same all results at once rather than one by one to prevent user only seeing partial results
-    """
-    # pass
-
 
 @timeit
 def fetch_new_data():
     # deleting all makes modified useless as created_at shares same value...
     # Currency.objects.all().delete()
 
-    # # Using requests with lxml/xpath
-    # save_naver(),
-    # save_stra(),
-    # save_wiztoss(),
-    # # Using requests, XHR
-    # save_commbank(),
-    # save_wise(),
-    # save_wirebarley(),
-    # save_remitly(),
-    # save_instarem(),
-    # save_azimo(),
+    # Using requests with lxml/xpath
+    save_naver(),
+    save_stra(),
+    save_wiztoss(),
+    # Using requests, XHR
+    save_commbank(),
+    save_wise(),
+    save_wirebarley(),
+    save_remitly(),
+    save_instarem(),
+    save_azimo(),
     save_orbitremit(),
-    # # Using selenium
-    # save_dondirect(),
-    # save_wontop(),
-    # save_gomtransfer(),
+    # Using selenium
+    save_dondirect(),
+    save_wontop(),
+    save_gomtransfer(),
