@@ -20,9 +20,7 @@ from .models import Currency
 from .serializers import CurrencySerializer
 
 BASE_AMOUNT = 1000
-USER_AGENT = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
-)
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
 
 
 class CurrencyHome(APIView):
@@ -123,15 +121,20 @@ def scrape_wontop():
         return (0.0, 0.0)
 
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div/aside[@id='text-11']")))
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div/aside[@id='text-11']"))
+        )
     except NoSuchElementException:
         return (0.0, 0.0)
     finally:
         # <iframe class="resp-iframe" style="height: 210px;" src="http://wontop.com.au/wp-content/myfiles/au2kr9.php" frameborder="0"></iframe>
-        iframe = driver.find_element_by_xpath("//iframe[@class='resp-iframe']")
-        driver.switch_to.frame(iframe)
+        # iframe = driver.find_element_by_xpath("//iframe[@class='resp-iframe']")
+        # driver.switch_to.frame(iframe)
 
         try:
+            WebDriverWait(driver, 10).until(
+                EC.frame_to_be_available_and_switch_to_it((By.XPATH, "//iframe[@class='resp-iframe']"))
+            )
             rate = driver.find_element_by_xpath("//div[@id='rate']/strong").text
         except NoSuchElementException:
             rate = 0
@@ -605,7 +608,9 @@ def scrape_wiztoss():
     s = requests.session()
     rr = s.get("https://wiztoss.com/faq-exchange-transfer")
     node2 = html.fromstring(rr.content)
-    fee = node2.xpath("//h5[contains(text(), '수수료가 있나요')]/ancestor::div[@class='card-header']/following-sibling::div//p")
+    fee = node2.xpath(
+        "//h5[contains(text(), '수수료가 있나요')]/ancestor::div[@class='card-header']/following-sibling::div//p"
+    )
     if len(fee) <= 0:
         fee = 0
     fee = fee[0].text.strip()
