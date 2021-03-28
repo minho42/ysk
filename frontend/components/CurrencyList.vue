@@ -1,5 +1,5 @@
 <template>
-  <div id="list" class="flex flex-col items-center justify-between pt-2 pb-2 mx-2">
+  <div id="list" class="flex flex-col items-center justify-between mx-2">
     <div v-if="currencies.length === 0" class="text-center">
       Loading...
     </div>
@@ -24,7 +24,7 @@
       </tbody>
     </table>
 
-    <div class="my-3">{{ lastUpdate }}</div>
+    <div class="mt-3">{{ lastUpdate }}</div>
 
   </div>  
 </template>
