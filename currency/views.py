@@ -83,6 +83,8 @@ def scrape_gomtransfer():
     except TimeoutException:
         driver.quit()
         return (0.0, 0.0)
+    except AttributeError:
+        return (0.0, 0.0)
 
     try:
         element = WebDriverWait(driver, 10).until(
@@ -118,6 +120,8 @@ def scrape_wontop():
         driver.get(url)
     except TimeoutException:
         driver.quit()
+        return (0.0, 0.0)
+    except AttributeError:
         return (0.0, 0.0)
 
     try:
@@ -160,6 +164,8 @@ def scrape_dondirect():
         driver.get(url)
     except TimeoutException:
         driver.quit()
+        return (0.0, 0.0)
+    except AttributeError:
         return (0.0, 0.0)
 
     try:
