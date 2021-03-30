@@ -6,7 +6,7 @@ from typing import Callable
 import requests
 from core.utils import get_chromedriver, timeit
 from django.utils import timezone
-from lxml import html
+from lxml import etree, html
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
@@ -481,6 +481,44 @@ def scrape_naver_usd():
     return rate
 
 
+def scrape_hanpass():
+    rate_node_xpath = "//input[@id='hdnDtRemt']/@value"
+    # fee_node_xpath = "//input[@id='hdnDtOnlineFee']/@value"
+    rate_xpath = "//ToKrCustRate"  # ?ToKrStmtRate
+    fee_xpath = "//RemtOnlineFee"
+    url = "https://m.hanpass.net/Pag/Login/Intro.aspx"
+    headers = {"user-agent": USER_AGENT}
+    s = requests.session()
+    r = s.get(url, headers=headers)
+    node = html.fromstring(r.content)
+
+    try:
+        """
+        rate & fee: ['<DT ><DR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CntyTid>1911031016581139812</CntyTid><CntyNm>호주</CntyNm><CntyCd>AU</CntyCd><CurcNm>AUD</CurcNm><RemtOnlineFee>0.00</RemtOnlineFee><ToKrCustRate>865.74</ToKrCustRate><ToKrStmtRate>865.74</ToKrStmtRate><RemtOneTimeLimt>5000000.00</RemtOneTimeLimt></DR></DT>']
+        fee: ['<DT ><DR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CntyTid>1911031016581139812</CntyTid><RemtOnlineFee>0.00</RemtOnlineFee></DR><DR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CntyTid>1911022331502077875</CntyTid><RemtOnlineFee>5.00</RemtOnlineFee></DR><DR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CntyTid>1911071119243273526</CntyTid><RemtOnlineFee>10.00</RemtOnlineFee></DR><DR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CntyTid>1911121153207261650</CntyTid><RemtOnlineFee>5.00</RemtOnlineFee></DR><DR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CntyTid>1912081851039437169</CntyTid><RemtOnlineFee>0.00</RemtOnlineFee></DR><DR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CntyTid>2006211525063436749</CntyTid><RemtOnlineFee>0.00</RemtOnlineFee></DR></DT>']
+        """
+        rate_node_value = node.xpath(rate_node_xpath)[0]
+    except IndexError:
+        return (0.0, 0.0)
+
+    rate_node = etree.fromstring(rate_node_value)
+
+    try:
+        rate = rate_node.xpath(rate_xpath)[0].text
+        fee = rate_node.xpath(fee_xpath)[0].text
+    except (KeyError, IndexError):
+        rate = 0
+        fee = 0
+
+    if len(rate) <= 0:
+        rate = 0
+    if len(fee) <= 0:
+        fee = 0
+
+    rate = rate.replace(",", "")
+    return (rate, fee)
+
+
 def scrape_naver_aud():
     rate = scrape_currency(
         "https://finance.naver.com/marketindex/exchangeDetail.nhn?marketindexCd=FX_AUDKRW",
@@ -582,7 +620,7 @@ def scrape_azimo():
             rate = float(rate_in_usd) * float(usd_krw_rate)
         else:
             print("Can't convert USD->KRW")
-            return (0, 0)
+            return (0.0, 0.0)
     except (KeyError, IndexError):
         rate = 0
         fee = 0
@@ -702,6 +740,11 @@ def save_gomtransfer():
 
 
 @timeit
+def save_hanpass():
+    return save_currency("Hanpass", "https://m.hanpass.net/Pag/Login/Intro.aspx", scrape_hanpass)
+
+
+@timeit
 def save_naver():
     return save_currency(
         "Naver",
@@ -736,6 +779,7 @@ def fetch_new_data():
 
     # Using requests with lxml/xpath
     save_naver(),
+    save_hanpass(),
     save_stra(),
     save_wiztoss(),
     # Using requests, XHR
