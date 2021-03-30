@@ -1,12 +1,7 @@
 <template>
   <tr class="border-b border-gray-700">
     <td>
-      <div v-if="name === 'Naver'">
-        -
-      </div>
-      <div v-else>
-        {{ index }}
-      </div>
+      {{ index }}
     </td>
     <td class="py-1">
       <a class="px-1 text-blue-400 hover:underline"
