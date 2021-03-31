@@ -7,7 +7,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "호주 역송금 업체 환율 비교",
+    title: "호주 → 한국 송금 환율 비교",
     htmlAttrs: {
       lang: "en"
     },
@@ -17,8 +17,7 @@ export default {
       {
         hid: "description",
         name: "description",
-        content:
-          "호주 역송금 한국 송금 wiztoss 위즈토스 돈다이렉트 환율 어플 비교 사이트 추천 환전 방법"
+        content: "역송금, 호주 → 한국 송금 환율 비교"
       }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }]
