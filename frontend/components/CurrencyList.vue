@@ -1,5 +1,5 @@
 <template>
-  <div id="list" class="flex flex-col items-center justify-between mx-2">
+  <div id="list" class="flex flex-col items-center justify-between">
     <div v-if="currencies.length === 0" class="text-center">
       Loading...
     </div>
