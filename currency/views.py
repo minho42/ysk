@@ -356,7 +356,7 @@ def scrape_wise():
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-origin",
         "time-zone": "+1100",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+        "user-agent": USER_AGENT,
         "x-access-token": "Tr4n5f3rw153",
         # "referrerPolicy": "strict-origin-when-cross-origin",
     }
@@ -555,7 +555,7 @@ def scrape_orbitremit():
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-site",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+        "user-agent": USER_AGENT,
     }
     data = json.dumps({"amount": "%.2f" % BASE_AMOUNT, "focus": "send", "payout": "KRW", "send": "AUD"})
     s = requests.session()
