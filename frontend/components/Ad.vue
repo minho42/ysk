@@ -4,7 +4,9 @@
       <a 
       class="text-lg hover:underline tracking-wide"
       href="https://www.coinbase.com/join/kim_dk4p" target="_blank" rel="noopener noreferrer">
-        Get free $10 in Bitcoin on Coinbase! 
+        Get 
+        <span class="text-yellow-400 font-semibold">free Bitcoin</span>
+        on Coinbase 
       </a>
     </div>
     <div class="ml-1">
