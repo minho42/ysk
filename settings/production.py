@@ -7,6 +7,11 @@ ALLOWED_HOSTS += [
     "www.audkrw.com",
 ]
 
+CORS_ORIGIN_WHITELIST += (
+    "https://audkrw.netlify.app",
+    "https://audkrw.com",
+)
+
 REDIS_URL = env("REDIS_URL")
 
 CELERY_BROKER_URL = REDIS_URL
