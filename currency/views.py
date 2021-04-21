@@ -22,6 +22,8 @@ from .serializers import CurrencySerializer
 BASE_AMOUNT = 1000
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
 
+# TODO Make consistent: return 0 vs return 0.0
+
 
 class CurrencyHome(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -68,6 +70,9 @@ def get_real_rate(rate: float, fee: float) -> float:
     if not fee or fee == 0:
         return rate
     return round(((BASE_AMOUNT - fee) * rate), 2) / BASE_AMOUNT
+
+
+# TODO selenium: better exception handling / nested try catch / add time limit exceptions as well
 
 
 def scrape_gomtransfer():
