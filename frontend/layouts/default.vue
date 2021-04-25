@@ -1,6 +1,7 @@
 <template>
   <div class="text-gray-300">
     <Navbar />
+    <Ad />
     <Nuxt />
     <Footer />
     
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+import Ad from '../components/Ad'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 export default {
