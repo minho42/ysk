@@ -33,7 +33,11 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ["@nuxtjs/tailwindcss"],
+  buildModules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-analytics"],
+
+  googleAnalytics: {
+    id: "G-7E67TTSV17"
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [],
