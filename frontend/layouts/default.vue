@@ -1,22 +1,21 @@
 <template>
   <div class="text-gray-300">
     <Navbar />
-    <Ad />
+    <!-- <Ad /> -->
     <Nuxt />
     <Footer />
-    
   </div>
 </template>
 
 <script>
-import Ad from '../components/Ad'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+// import Ad from '../components/Ad'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 export default {
   components: {
-    Navbar,
+    Navbar
   }
-}
+};
 </script>
 
 <style>
