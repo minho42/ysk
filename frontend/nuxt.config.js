@@ -20,7 +20,14 @@ export default {
         content: "역송금, 호주 → 한국 송금 환율 비교"
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }],
+    script: [
+      {
+        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+        "data-ad-client": "ca-pub-1639129328565259",
+        async: true
+      }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
