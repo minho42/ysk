@@ -1,6 +1,5 @@
 import json
 import requests
-import pprint
 
 # TODO Where bearer token and cookies are from???
 
