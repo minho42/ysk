@@ -784,7 +784,7 @@ def fetch_new_data():
 
     # Using requests with lxml/xpath
     save_naver(),
-    save_hanpass(),
+    # save_hanpass(),
     save_stra(),
     save_wiztoss(),
     # Using requests, XHR
