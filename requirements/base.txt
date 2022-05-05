@@ -1,0 +1,14 @@
+celery
+Django
+django-celery-beat
+django-cors-headers
+django-environ
+djangorestframework
+gunicorn
+lxml
+psycopg2-binary
+redis
+requests
+selenium
+sentry-sdk
+whitenoise
