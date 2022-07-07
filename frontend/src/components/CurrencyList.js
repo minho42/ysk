@@ -7,8 +7,7 @@ const CurrencyList = () => {
   const [lastUpdate, setLastUpdate] = useState("");
 
   const getData = async () => {
-    const res = await fetch("https://ysk.herokuapp.com/data");
-    // const res = await fetch('http://localhost:8000/data')
+    const res = await fetch("http://localhost:8000/data");
     const data = await res.json();
     // console.log(data);
     setCurrencies(data);
