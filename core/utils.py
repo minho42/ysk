@@ -37,16 +37,7 @@ def get_chromedriver(headless: bool = True) -> object:
     options.add_experimental_option("prefs", prefs)
 
     try:
-        if settings.DEBUG:
-            driver = webdriver.Chrome(os.environ.get("CHROME_DRIVER_PATH"), options=options)
-        else:
-            # Heroku
-            options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-
-            driver = webdriver.Chrome(
-                executable_path=os.environ.get("CHROMEDRIVER_PATH"),
-                chrome_options=options,
-            )
+        driver = webdriver.Chrome(os.environ.get("CHROME_DRIVER_PATH"), options=options)
     except WebDriverException:
         driver = None
 

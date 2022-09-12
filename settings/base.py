@@ -1,6 +1,5 @@
 from pathlib import Path
 
-import django_heroku
 import environ
 
 env = environ.Env(DEBUG=(bool, False))
@@ -156,5 +155,3 @@ CELERY_RESULT_SERIALIZER = "json"
 # CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = "Australia/ACT"
 CELERY_TASK_SOFT_TIME_LIMIT = 120
-
-django_heroku.settings(locals())
