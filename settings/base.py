@@ -10,7 +10,7 @@ environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = env("CURRENCY_SECRET_KEY")
+SECRET_KEY = env("YSK_SECRET_KEY")
 
 DEBUG = env("DEBUG")
 
@@ -103,9 +103,9 @@ WSGI_APPLICATION = "ysk.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "currency",
-        "USER": "currencyuser",
-        "PASSWORD": env("CURRENCY_DB_PASSWORD"),
+        "NAME": "ysk",
+        "USER": "yskuser",
+        "PASSWORD": env("YSK_DB_PASSWORD"),
         "HOST": "localhost",
         "PORT": "5432",
     }
@@ -155,3 +155,5 @@ CELERY_RESULT_SERIALIZER = "json"
 # CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = "Australia/ACT"
 CELERY_TASK_SOFT_TIME_LIMIT = 120
+
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
