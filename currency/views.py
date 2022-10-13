@@ -458,26 +458,23 @@ def scrape_orbitremit():
     headers = {
         "authority": "www.orbitremit.com",
         "method": "POST",
-        "path": "/api/rates",
-        "scheme": "https",
         "accept": "*/*",
-        "accept-encoding": "gzip, deflate, br",
-        "accept-language": "en-AU,en;q=0.9,ko-KR;q=0.8,ko;q=0.7,en-GB;q=0.6,en-US;q=0.5",
+        "accept-language": "en-AU,en-GB;q=0.9,en-US;q=0.8,en;q=0.7",
         "cache-control": "no-cache",
         "content-type": "application/json",
-        # TODO: cookies are static for now -> check if cookies change or are set dynamically
-        "cookie": "__cfduid=d91dc221200fee64cc6ef8b8553f0bd561616507020; sendCurrency=AUD; track=%5B%7B%22Params%22:%7B%22keyword%22:%22orbit%2520remit%22,%22matchtype%22:%22e%22,%22device%22:%22m%22,%22creative%22:%22337323736282%22,%22network%22:%22g%22,%22campaignid%22:%221729107244%22,%22adgroupid%22:%2267601175357%22,%22targetid%22:%22kwd-38866474671%22,%22loc_physical_ms%22:%229071758%22,%22_gcamp%22:%22Brand%22,%22gclid%22:%22Cj0KCQjwutaCBhDfARIsAJHWnHsQo1T4IDtf-6CQ2bdMkkXgAKfGjIlobJnpMR9rAxiKw8RSfGrOHkwaAqcSEALw_wcB%22%7D,%22Time%22:1616507022101%7D%5D",
         "origin": "https://www.orbitremit.com",
         "pragma": "no-cache",
         "referer": "https://www.orbitremit.com/",
-        "sec-ch-ua": '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
+        "sec-ch-ua": '"Chromium";v="106", "Google Chrome";v="106", "Not;A=Brand";v="99"',
         "sec-ch-ua-mobile": "?0",
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-site",
+        "sec-fetch-site": "same-origin",
         "user-agent": USER_AGENT,
     }
-    data = json.dumps({"amount": "%.2f" % BASE_AMOUNT, "focus": "send", "payout": "KRW", "send": "AUD"})
+    data = json.dumps(
+        {"amount": "%.2f" % BASE_AMOUNT, "sendCurrency": "AUD", "payoutCurrency": "KRW", "focus": "send"}
+    )
     s = requests.session()
     r = s.post(url=url, headers=headers, data=data)
     rr = json.loads(r.text)
