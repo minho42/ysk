@@ -505,19 +505,17 @@ def scrape_stra():
 def scrape_wiztoss():
     # "1AUD = 813KRW" --> "813"
     rate = scrape_currency(
-        "https://wiztoss.com/",
+        "https://kr.wiztoss.com/",
         "//h5[contains(text(), '1AUD')]",
         rate_regex="1AUD = ([\d,.]+)KRW",
     )
     s = requests.session()
-    rr = s.get("https://wiztoss.com/faq-exchange-transfer")
+    rr = s.get("https://kr.wiztoss.com/faq-exchange-transfer")
     node2 = html.fromstring(rr.content)
-    fee = node2.xpath(
-        "//h5[contains(text(), '수수료가 있나요')]/ancestor::div[@class='card-header']/following-sibling::div//p"
-    )
+    fee = node2.xpath('//*[@id="collapseFour4"]/div/p[1]/text()')
     if len(fee) <= 0:
         fee = 0
-    fee = fee[0].text.strip()
+    fee = fee[0].strip()
     fee = re.findall(r"\$([\d,.]+)", fee)[0]
 
     return (rate, fee)
@@ -600,7 +598,7 @@ def save_naver():
 
 @timeit
 def save_wiztoss():
-    return save_currency("Wiztoss", "https://wiztoss.com", scrape_wiztoss)
+    return save_currency("Wiztoss", "https://kr.wiztoss.com", scrape_wiztoss)
 
 
 @timeit
