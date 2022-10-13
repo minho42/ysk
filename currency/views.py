@@ -70,48 +70,6 @@ def get_real_rate(rate: float, fee: float) -> float:
     return round(((BASE_AMOUNT - fee) * rate), 2) / BASE_AMOUNT
 
 
-def scrape_wontop():
-    driver = get_chromedriver()
-
-    url = "http://www.wontop.com.au/"
-    try:
-        driver.get(url)
-    except TimeoutException:
-        driver.quit()
-        return (0.0, 0.0)
-    except AttributeError:
-        return (0.0, 0.0)
-
-    try:
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div/aside[@id='text-11']"))
-        )
-    except NoSuchElementException:
-        return (0.0, 0.0)
-    finally:
-        # <iframe class="resp-iframe" style="height: 210px;" src="http://wontop.com.au/wp-content/myfiles/au2kr9.php" frameborder="0"></iframe>
-        # iframe = driver.find_element_by_xpath("//iframe[@class='resp-iframe']")
-        # driver.switch_to.frame(iframe)
-
-        try:
-            WebDriverWait(driver, 10).until(
-                EC.frame_to_be_available_and_switch_to_it((By.XPATH, "//iframe[@class='resp-iframe']"))
-            )
-            rate = driver.find_element_by_xpath("//div[@id='rate']/strong").text
-        except NoSuchElementException:
-            rate = 0
-
-        driver.quit()
-
-        if rate:
-            rate = re.findall(r"[\d,.]+", rate.strip())[0]
-            # TODO Make sure the fee is correct
-            fee = 0
-            return (rate, fee)
-        else:
-            return (0.0, 0.0)
-
-
 def scrape_dondirect():
     # 돈다이렉트
     # Using selenium to scrape as they used angular
@@ -578,11 +536,6 @@ def save_instarem():
 
 
 @timeit
-def save_wontop():
-    return save_currency("Wontop", "http://www.wontop.com.au", scrape_wontop)
-
-
-@timeit
 def save_dondirect():
     return save_currency("DonDirect", "https://dondirect.com.au", scrape_dondirect)
 
@@ -624,13 +577,12 @@ def fetch_new_data():
     save_naver(),
     save_stra(),
     save_wiztoss(),
-    # Using requests, XHR
+    # # Using requests, XHR
     save_commbank(),
     save_wise(),
     save_wirebarley(),
     save_remitly(),
     save_instarem(),
-    # save_orbitremit(),
+    save_orbitremit(),
     # Using selenium
     save_dondirect(),
-    save_wontop(),
