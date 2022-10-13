@@ -2,6 +2,7 @@
 django-debug-toolbar
 ipdb
 ipython
+pip-tools
 pytest
 pytest-django
 more-itertools
