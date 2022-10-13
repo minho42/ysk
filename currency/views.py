@@ -132,16 +132,16 @@ def scrape_dondirect():
         return (0.0, 0.0)
     finally:
         try:
-            rate = driver.find_element_by_xpath(
-                "/html/body/div[2]/div/div[1]/md-content/div/span/div[1]/div[1]/div[1]/center/span"
+            rate = driver.find_element(
+                "xpath", "/html/body/div[2]/div/div[1]/md-content/div/span/div[1]/div[1]/div[1]/center/span"
             ).text
         except NoSuchElementException:
             rate = 0
 
         # 입금가능 / 입금불가
         try:
-            note = driver.find_element_by_xpath(
-                "/html/body/div[2]/div/div[1]/md-content/div/span/div[1]/div[1]/div[1]/center[2]/div/div"
+            note = driver.find_element(
+                "xpath", "/html/body/div[2]/div/div[1]/md-content/div/span/div[1]/div[1]/div[1]/center[2]/div/div"
             ).text
             if not "입금불가" in note:
                 note = None
