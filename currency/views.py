@@ -70,47 +70,6 @@ def get_real_rate(rate: float, fee: float) -> float:
     return round(((BASE_AMOUNT - fee) * rate), 2) / BASE_AMOUNT
 
 
-def scrape_gomtransfer():
-    # https://www.gomtransfer.com/apilayer.php?key=check567890check56991&_=1576498334524
-    # XHR 로 받은 네이버기준환율 (실시간아님) 에서 8원을 빼도록 계산됨
-
-    driver = get_chromedriver()
-
-    url = "https://www.gomtransfer.com/"
-    try:
-        driver.get(url)
-    except TimeoutException:
-        driver.quit()
-        return (0.0, 0.0)
-    except AttributeError:
-        return (0.0, 0.0)
-
-    try:
-        element = WebDriverWait(driver, 10).until(
-            # 네이버 기준환율 Loading... -> 네이버 기준환율 xxx.xx원
-            EC.text_to_be_present_in_element(
-                (By.XPATH, "//label[@id='auau']"), "원"
-            )  # This is much faster than "presence_of_element_located"
-        )
-    except NoSuchElementException:
-        return (0.0, 0.0)
-    finally:
-        try:
-            rate = driver.find_element_by_xpath("//td[@id='hohans']").text
-        except NoSuchElementException:
-            rate = 0
-
-        driver.quit()
-
-        if rate:
-            rate = re.findall(r"[\d,.]+", rate.strip())[0]
-            # TODO Make sure the fee is correct
-            fee = 0
-            return (rate, fee)
-        else:
-            return (0.0, 0.0)
-
-
 def scrape_wontop():
     driver = get_chromedriver()
 
@@ -634,11 +593,6 @@ def save_dondirect():
 
 
 @timeit
-def save_gomtransfer():
-    return save_currency("GomTransfer", "https://www.gomtransfer.com", scrape_gomtransfer)
-
-
-@timeit
 def save_naver():
     return save_currency(
         "Naver",
@@ -685,4 +639,3 @@ def fetch_new_data():
     # Using selenium
     save_dondirect(),
     save_wontop(),
-    save_gomtransfer(),
